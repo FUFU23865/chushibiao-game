@@ -154,6 +154,7 @@
             padding: 15px 35px;
             font-size: 18px;
             cursor: pointer;
+            margin-top: 15px;
         }
 
         button:hover {
@@ -252,56 +253,124 @@
 
         <!-- 第一回合 -->
 
-        <div class="round">
-            第一回合・先帝留下的重臣
+        <div id="round1">
+
+            <div class="round">
+                第一回合・先帝留下的重臣
+            </div>
+
+            <div class="event">
+
+                <h2>「受任於敗軍之際」</h2>
+
+                <p>
+                    先帝劉備去世後，諸葛亮繼續輔佐你治理蜀漢。
+                    他掌握軍政大權，也準備開始北伐。
+                </p>
+
+                <div class="quote">
+
+                    「受任於敗軍之際，奉命於危難之間，
+                    爾來二十有一年矣。」
+
+                </div>
+
+                <p>
+                    你必須決定：<br>
+                    <strong>你要給諸葛亮多少權力？</strong>
+                </p>
+
+
+                <div class="choices">
+
+                    <div class="choice" onclick="choose(1)">
+                        <strong>A｜完全信任諸葛亮</strong>
+                        <br><br>
+                        既然先帝如此信任他，朕也應當充分授權。
+                    </div>
+
+                    <div class="choice" onclick="choose(2)">
+                        <strong>B｜信任，但保留監督</strong>
+                        <br><br>
+                        丞相能力出眾，但國家大事仍需要相互制衡。
+                    </div>
+
+                    <div class="choice" onclick="choose(3)">
+                        <strong>C｜限制丞相權力</strong>
+                        <br><br>
+                        蜀漢不能讓任何一位臣子的權力過度集中。
+                    </div>
+
+                </div>
+
+                <div id="result" class="hidden"></div>
+
+            </div>
+
         </div>
 
-        <div class="event">
 
-            <h2>「受任於敗軍之際」</h2>
+        <!-- 第二回合 -->
 
-            <p>
-                先帝劉備去世後，諸葛亮繼續輔佐你治理蜀漢。
-                他掌握軍政大權，也準備開始北伐。
-            </p>
+        <div id="round2" class="hidden">
 
-            <div class="quote">
-
-                「受任於敗軍之際，奉命於危難之間，
-                爾來二十有一年矣。」
-
+            <div class="round">
+                第二回合・朝廷中的人
             </div>
 
-            <p>
-                你必須決定：<br>
-                <strong>你要給諸葛亮多少權力？</strong>
-            </p>
+            <div class="event">
 
+                <h2>「親賢臣，遠小人」</h2>
 
-            <div class="choices">
+                <p>
+                    諸葛亮開始整理朝政。
+                    他認為蜀漢要振興，首先必須任用賢能之士。
+                </p>
 
-                <div class="choice" onclick="choose(1)">
-                    <strong>A｜完全信任諸葛亮</strong>
-                    <br><br>
-                    既然先帝如此信任他，朕也應當充分授權。
+                <div class="quote">
+
+                    「親賢臣，遠小人，此先漢所以興隆也；
+                    親小人，遠賢臣，此後漢所以傾頹也。」
+
                 </div>
 
-                <div class="choice" onclick="choose(2)">
-                    <strong>B｜信任，但保留監督</strong>
-                    <br><br>
-                    丞相能力出眾，但國家大事仍需要相互制衡。
+                <p>
+                    朝廷中出現了不同的聲音。
+                    有人主張完全按照諸葛亮的建議用人，
+                    也有人認為皇帝應該自己判斷。
+                </p>
+
+                <p>
+                    <strong>你會怎麼做？</strong>
+                </p>
+
+                <div class="choices">
+
+                    <div class="choice" onclick="chooseRound2(1)">
+                        <strong>A｜完全採納諸葛亮的用人建議</strong>
+                        <br><br>
+                        丞相最了解國政，既然他推薦的人才，
+                        就應該放心任用。
+                    </div>
+
+                    <div class="choice" onclick="chooseRound2(2)">
+                        <strong>B｜參考諸葛亮，但由朕最後決定</strong>
+                        <br><br>
+                        賢臣固然重要，但皇帝也必須親自了解臣下。
+                    </div>
+
+                    <div class="choice" onclick="chooseRound2(3)">
+                        <strong>C｜避免讓丞相主導所有人事</strong>
+                        <br><br>
+                        即使是賢能的丞相，也不能讓朝廷所有官員
+                        都由他決定。
+                    </div>
+
                 </div>
 
-                <div class="choice" onclick="choose(3)">
-                    <strong>C｜限制丞相權力</strong>
-                    <br><br>
-                    蜀漢不能讓任何一位臣子的權力過度集中。
-                </div>
+                <div id="result2" class="hidden"></div>
 
             </div>
-
-
-            <div id="result" class="hidden"></div>
 
         </div>
 
@@ -312,7 +381,9 @@
 
 <script>
 
+    // =========================
     // 遊戲數值
+    // =========================
 
     let power = 60;
     let army = 50;
@@ -320,7 +391,9 @@
     let people = 60;
 
 
+    // =========================
     // 開始遊戲
+    // =========================
 
     function startGame() {
 
@@ -331,7 +404,9 @@
     }
 
 
-    // 玩家選擇
+    // =========================
+    // 第一回合
+    // =========================
 
     function choose(choice) {
 
@@ -359,6 +434,10 @@
                     <br>
                     <strong>諸葛亮在朝廷中的影響力正在增加。</strong>
                 </p>
+
+                <button onclick="nextRound()">
+                    下一回合 →
+                </button>
             `;
 
         }
@@ -385,6 +464,10 @@
                     君臣之間維持了一定的距離，
                     但也保留了合作的空間。
                 </p>
+
+                <button onclick="nextRound()">
+                    下一回合 →
+                </button>
             `;
 
         }
@@ -412,6 +495,10 @@
                     但諸葛亮開始思考：
                     <strong>陛下是否真的信任臣？</strong>
                 </p>
+
+                <button onclick="nextRound()">
+                    下一回合 →
+                </button>
             `;
 
         }
@@ -424,7 +511,143 @@
     }
 
 
+    // =========================
+    // 前往第二回合
+    // =========================
+
+    function nextRound() {
+
+        document.getElementById("round1").classList.add("hidden");
+
+        document.getElementById("round2").classList.remove("hidden");
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    // =========================
+    // 第二回合
+    // =========================
+
+    function chooseRound2(choice) {
+
+        let result = document.getElementById("result2");
+
+        if (choice === 1) {
+
+            power += 4;
+            people += 2;
+
+            result.innerHTML = `
+                <h3>你選擇了：完全採納諸葛亮的建議</h3>
+
+                <p>
+                    朝廷很快任用了數名諸葛亮推薦的人才。
+                    政令推行變得更加順暢。
+                </p>
+
+                <p>
+                    <strong>國力 +4　民心 +2</strong>
+                </p>
+
+                <p>
+                    只是，朝廷中開始有人注意到：
+                    <br>
+                    <strong>越來越多重要官員，都是丞相推薦的人。</strong>
+                </p>
+
+                <button onclick="nextRound2()">
+                    下一回合 →
+                </button>
+            `;
+
+        }
+
+        else if (choice === 2) {
+
+            power += 2;
+            people += 3;
+
+            result.innerHTML = `
+                <h3>你選擇了：參考諸葛亮，但由朕最後決定</h3>
+
+                <p>
+                    你仔細了解諸葛亮推薦的官員，
+                    再決定是否任用。
+                </p>
+
+                <p>
+                    <strong>國力 +2　民心 +3</strong>
+                </p>
+
+                <p>
+                    朝廷開始習慣一件事情：
+                    <br>
+                    <strong>丞相提供意見，但最後的決定仍然在皇帝手中。</strong>
+                </p>
+
+                <button onclick="nextRound2()">
+                    下一回合 →
+                </button>
+            `;
+
+        }
+
+        else if (choice === 3) {
+
+            power -= 2;
+            people += 1;
+
+            result.innerHTML = `
+                <h3>你選擇了：避免讓丞相主導所有人事</h3>
+
+                <p>
+                    你開始親自審核更多官員。
+                    朝廷中的權力分配更加分散。
+                </p>
+
+                <p>
+                    <strong>國力 -2　民心 +1</strong>
+                </p>
+
+                <p>
+                    但諸葛亮似乎有些失望。
+                    <br>
+                    <strong>「陛下似乎開始防備臣了。」</strong>
+                </p>
+
+                <button onclick="nextRound2()">
+                    下一回合 →
+                </button>
+            `;
+
+        }
+
+        updateDisplay();
+
+        result.classList.remove("hidden");
+
+    }
+
+
+    // =========================
+    // 第二回合結束
+    // =========================
+
+    function nextRound2() {
+
+        alert("第二回合完成！下一步我們會加入第三回合。");
+
+    }
+
+
+    // =========================
     // 更新畫面上的數值
+    // =========================
 
     function updateDisplay() {
 
