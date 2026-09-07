@@ -32,10 +32,7 @@
             margin-bottom: 30px;
         }
 
-
-        /* =========================
-           開始畫面
-        ========================= */
+        /* 開始畫面 */
 
         #start-screen {
             text-align: center;
@@ -54,10 +51,14 @@
             line-height: 1.8;
         }
 
+        /* 國家狀態 */
 
-        /* =========================
-           資源
-        ========================= */
+        .status-title {
+            font-size: 14px;
+            color: #776b5d;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
 
         .resources {
             display: grid;
@@ -69,7 +70,7 @@
         .resource {
             background: white;
             border-radius: 12px;
-            padding: 15px 5px;
+            padding: 16px 5px;
             text-align: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.08);
         }
@@ -80,15 +81,12 @@
         }
 
         .resource-value {
-            font-size: 28px;
+            font-size: 22px;
             font-weight: bold;
-            margin-top: 5px;
+            margin-top: 8px;
         }
 
-
-        /* =========================
-           回合
-        ========================= */
+        /* 回合 */
 
         .round {
             color: #8b5e34;
@@ -115,10 +113,7 @@
             margin: 20px 0;
         }
 
-
-        /* =========================
-           選項
-        ========================= */
+        /* 選項 */
 
         .choices {
             display: grid;
@@ -144,10 +139,7 @@
             font-size: 18px;
         }
 
-
-        /* =========================
-           結果
-        ========================= */
+        /* 結果 */
 
         #result,
         #result2,
@@ -160,10 +152,7 @@
             border: 1px solid #ddd4c7;
         }
 
-
-        /* =========================
-           決策影響樹
-        ========================= */
+        /* 決策影響樹 */
 
         .impact-tree {
             margin: 28px 0;
@@ -236,10 +225,7 @@
             color: #695b84;
         }
 
-
-        /* =========================
-           按鈕
-        ========================= */
+        /* 按鈕 */
 
         .hidden {
             display: none;
@@ -260,10 +246,7 @@
             opacity: 0.85;
         }
 
-
-        /* =========================
-           手機版
-        ========================= */
+        /* 手機版 */
 
         @media (max-width: 600px) {
 
@@ -286,7 +269,6 @@
             .impact-decision {
                 margin-bottom: 15px;
             }
-
         }
 
     </style>
@@ -297,10 +279,7 @@
 
 <div class="game">
 
-
-    <!-- =========================
-         開始畫面
-    ========================= -->
+    <!-- 開始畫面 -->
 
     <div id="start-screen">
 
@@ -338,10 +317,7 @@
     </div>
 
 
-
-    <!-- =========================
-         遊戲畫面
-    ========================= -->
+    <!-- 遊戲畫面 -->
 
     <div id="game-screen" class="hidden">
 
@@ -351,38 +327,36 @@
             你的每一個決定，都可能改變蜀漢的命運。
         </div>
 
-
-        <!-- 資源 -->
+        <div class="status-title">
+            當前國勢
+        </div>
 
         <div class="resources">
 
             <div class="resource">
                 <div class="resource-name">🏯 國力</div>
-                <div class="resource-value" id="power">60</div>
+                <div class="resource-value" id="power">穩定</div>
             </div>
 
             <div class="resource">
                 <div class="resource-name">⚔️ 軍力</div>
-                <div class="resource-value" id="army">50</div>
+                <div class="resource-value" id="army">尚可</div>
             </div>
 
             <div class="resource">
                 <div class="resource-name">🌾 糧草</div>
-                <div class="resource-value" id="food">50</div>
+                <div class="resource-value" id="food">尚足</div>
             </div>
 
             <div class="resource">
                 <div class="resource-name">❤️ 民心</div>
-                <div class="resource-value" id="people">60</div>
+                <div class="resource-value" id="people">安定</div>
             </div>
 
         </div>
 
 
-
-        <!-- =========================
-             第一回合
-        ========================= -->
+        <!-- 第一回合 -->
 
         <div id="round1">
 
@@ -438,10 +412,7 @@
         </div>
 
 
-
-        <!-- =========================
-             第二回合
-        ========================= -->
+        <!-- 第二回合 -->
 
         <div id="round2" class="hidden">
 
@@ -472,7 +443,6 @@
                 <p>
                     <strong>你會怎麼做？</strong>
                 </p>
-
 
                 <div class="choices">
 
@@ -505,10 +475,7 @@
         </div>
 
 
-
-        <!-- =========================
-             第三回合
-        ========================= -->
+        <!-- 第三回合 -->
 
         <div id="round3" class="hidden">
 
@@ -544,7 +511,6 @@
                     <strong>你決定如何安排這批人才？</strong>
                 </p>
 
-
                 <div class="choices">
 
                     <div class="choice" onclick="chooseRound3(1)">
@@ -576,24 +542,21 @@
 
         </div>
 
-
     </div>
 
 </div>
 
 
-
 <script>
 
     // =========================
-    // 遊戲數值
+    // 真實數值（玩家看不到）
     // =========================
 
     let power = 60;
     let army = 50;
     let food = 50;
     let people = 60;
-
 
 
     // =========================
@@ -603,11 +566,11 @@
     function startGame() {
 
         document.getElementById("start-screen").classList.add("hidden");
-
         document.getElementById("game-screen").classList.remove("hidden");
 
-    }
+        updateDisplay();
 
+    }
 
 
     // =========================
@@ -647,13 +610,10 @@
                     <strong>諸葛亮在朝廷中的影響力正在增加。</strong>
                 </p>
 
-                <button onclick="nextRound()">
-                    下一回合 →
-                </button>
+                <button onclick="nextRound()">下一回合 →</button>
             `;
 
         }
-
 
         else if (choice === 2) {
 
@@ -683,13 +643,10 @@
                     但也保留了合作的空間。
                 </p>
 
-                <button onclick="nextRound()">
-                    下一回合 →
-                </button>
+                <button onclick="nextRound()">下一回合 →</button>
             `;
 
         }
-
 
         else if (choice === 3) {
 
@@ -720,29 +677,20 @@
                     <strong>陛下是否真的信任臣？</strong>
                 </p>
 
-                <button onclick="nextRound()">
-                    下一回合 →
-                </button>
+                <button onclick="nextRound()">下一回合 →</button>
             `;
 
         }
 
         updateDisplay();
-
         result.classList.remove("hidden");
 
     }
 
 
-
-    // =========================
-    // 前往第二回合
-    // =========================
-
     function nextRound() {
 
         document.getElementById("round1").classList.add("hidden");
-
         document.getElementById("round2").classList.remove("hidden");
 
         window.scrollTo({
@@ -751,7 +699,6 @@
         });
 
     }
-
 
 
     // =========================
@@ -788,18 +735,13 @@
                 <p>
                     只是，朝廷中開始有人注意到：
                     <br>
-                    <strong>
-                        越來越多重要官員，都是丞相推薦的人。
-                    </strong>
+                    <strong>越來越多重要官員，都是丞相推薦的人。</strong>
                 </p>
 
-                <button onclick="nextRound2()">
-                    下一回合 →
-                </button>
+                <button onclick="nextRound2()">下一回合 →</button>
             `;
 
         }
-
 
         else if (choice === 2) {
 
@@ -827,18 +769,13 @@
                 <p>
                     朝廷開始習慣一件事情：
                     <br>
-                    <strong>
-                        丞相提供意見，但最後決定仍在皇帝手中。
-                    </strong>
+                    <strong>丞相提供意見，但最後決定仍在皇帝手中。</strong>
                 </p>
 
-                <button onclick="nextRound2()">
-                    下一回合 →
-                </button>
+                <button onclick="nextRound2()">下一回合 →</button>
             `;
 
         }
-
 
         else if (choice === 3) {
 
@@ -869,29 +806,20 @@
                     <strong>「陛下似乎開始防備臣了。」</strong>
                 </p>
 
-                <button onclick="nextRound2()">
-                    下一回合 →
-                </button>
+                <button onclick="nextRound2()">下一回合 →</button>
             `;
 
         }
 
         updateDisplay();
-
         result.classList.remove("hidden");
 
     }
 
 
-
-    // =========================
-    // 前往第三回合
-    // =========================
-
     function nextRound2() {
 
         document.getElementById("round2").classList.add("hidden");
-
         document.getElementById("round3").classList.remove("hidden");
 
         window.scrollTo({
@@ -902,7 +830,6 @@
     }
 
 
-
     // =========================
     // 第三回合
     // =========================
@@ -910,7 +837,6 @@
     function chooseRound3(choice) {
 
         let result = document.getElementById("result3");
-
 
         if (choice === 1) {
 
@@ -938,18 +864,13 @@
                 <p>
                     不久之後，朝臣們逐漸發現：
                     <br>
-                    <strong>
-                        重要政務幾乎都掌握在丞相所信任的人手中。
-                    </strong>
+                    <strong>重要政務幾乎都掌握在丞相所信任的人手中。</strong>
                 </p>
 
-                <button onclick="nextRound3()">
-                    下一回合 →
-                </button>
+                <button onclick="nextRound3()">下一回合 →</button>
             `;
 
         }
-
 
         else if (choice === 2) {
 
@@ -979,13 +900,10 @@
                     但朝廷內部仍維持一定程度的平衡。
                 </p>
 
-                <button onclick="nextRound3()">
-                    下一回合 →
-                </button>
+                <button onclick="nextRound3()">下一回合 →</button>
             `;
 
         }
-
 
         else if (choice === 3) {
 
@@ -1021,24 +939,16 @@
                     <strong>「陛下似乎開始有意牽制丞相。」</strong>
                 </p>
 
-                <button onclick="nextRound3()">
-                    下一回合 →
-                </button>
+                <button onclick="nextRound3()">下一回合 →</button>
             `;
 
         }
 
         updateDisplay();
-
         result.classList.remove("hidden");
 
     }
 
-
-
-    // =========================
-    // 第三回合結束
-    // =========================
 
     function nextRound3() {
 
@@ -1047,9 +957,8 @@
     }
 
 
-
     // =========================
-    // 製作影響樹
+    // 決策影響樹
     // =========================
 
     function impactTree(decision, items) {
@@ -1074,7 +983,6 @@
 
         });
 
-
         return `
 
             <div class="impact-tree">
@@ -1087,9 +995,7 @@
                     ${decision}
                 </div>
 
-                <div class="tree-line">
-                    │
-                </div>
+                <div class="tree-line">│</div>
 
                 <div class="tree-line">
                     ┌────────┼────────┐
@@ -1106,25 +1012,87 @@
     }
 
 
+    // =========================
+    // 把真正數字轉成玩家看到的狀態
+    // =========================
+
+    function getPowerStatus(value) {
+
+        if (value >= 70) {
+            return "強盛";
+        }
+
+        if (value >= 40) {
+            return "穩定";
+        }
+
+        return "衰弱";
+    }
+
+
+    function getArmyStatus(value) {
+
+        if (value >= 70) {
+            return "精強";
+        }
+
+        if (value >= 40) {
+            return "尚可";
+        }
+
+        return "薄弱";
+    }
+
+
+    function getFoodStatus(value) {
+
+        if (value >= 70) {
+            return "充足";
+        }
+
+        if (value >= 40) {
+            return "尚足";
+        }
+
+        return "短缺";
+    }
+
+
+    function getPeopleStatus(value) {
+
+        if (value >= 70) {
+            return "歸附";
+        }
+
+        if (value >= 40) {
+            return "安定";
+        }
+
+        return "不安";
+    }
+
 
     // =========================
-    // 更新畫面數值
+    // 更新玩家看到的國家狀態
     // =========================
 
     function updateDisplay() {
 
-        document.getElementById("power").innerText = power;
+        document.getElementById("power").innerText =
+            getPowerStatus(power);
 
-        document.getElementById("army").innerText = army;
+        document.getElementById("army").innerText =
+            getArmyStatus(army);
 
-        document.getElementById("food").innerText = food;
+        document.getElementById("food").innerText =
+            getFoodStatus(food);
 
-        document.getElementById("people").innerText = people;
+        document.getElementById("people").innerText =
+            getPeopleStatus(people);
 
     }
 
 </script>
-
 
 </body>
 
