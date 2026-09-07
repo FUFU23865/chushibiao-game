@@ -373,7 +373,71 @@
             </div>
 
         </div>
+        <!-- 第三回合 -->
 
+        <div id="round3" class="hidden">
+
+            <div class="round">
+                第三回合・丞相推薦的人才
+            </div>
+
+            <div class="event">
+
+                <h2>「此皆良實，志慮忠純」</h2>
+
+                <p>
+                    諸葛亮向你推薦郭攸之、費禕、董允等人，
+                    認為他們忠誠可靠，可以處理宮中的大小事務。
+                </p>
+
+                <div class="quote">
+                    「侍中、侍郎郭攸之、費禕、董允等，
+                    此皆良實，志慮忠純，是以先帝簡拔以遺陛下。」
+                </div>
+
+                <p>
+                    這些人確實能力優秀，
+                    但朝廷中也有人私下議論：
+                </p>
+
+                <p>
+                    「若重要職位都由丞相推薦的人擔任，
+                    朝廷是否會逐漸只剩下一種聲音？」
+                </p>
+
+                <p>
+                    <strong>你決定如何安排這批人才？</strong>
+                </p>
+
+                <div class="choices">
+
+                    <div class="choice" onclick="chooseRound3(1)">
+                        <strong>A｜全部重用</strong>
+                        <br><br>
+                        既然是先帝留下、丞相認可的人才，
+                        沒有理由不用。
+                    </div>
+
+                    <div class="choice" onclick="chooseRound3(2)">
+                        <strong>B｜重用人才，但保留不同聲音</strong>
+                        <br><br>
+                        任用郭攸之等人，同時保留其他官員參與決策。
+                    </div>
+
+                    <div class="choice" onclick="chooseRound3(3)">
+                        <strong>C｜刻意提拔非丞相系統的官員</strong>
+                        <br><br>
+                        朝廷需要平衡。
+                        即使能力稍弱，也應避免權力集中在同一群人手中。
+                    </div>
+
+                </div>
+
+                <div id="result3" class="hidden"></div>
+
+            </div>
+
+        </div>
     </div>
 
 </div>
@@ -638,17 +702,141 @@
     // 第二回合結束
     // =========================
 
-    function nextRound2() {
+   function nextRound2() {
 
-        alert("第二回合完成！下一步我們會加入第三回合。");
+    document.getElementById("round2").classList.add("hidden");
 
-    }
+    document.getElementById("round3").classList.remove("hidden");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
 
 
     // =========================
     // 更新畫面上的數值
     // =========================
+// =========================
+// 第三回合
+// =========================
 
+function chooseRound3(choice) {
+
+    let result = document.getElementById("result3");
+
+    if (choice === 1) {
+
+        power += 5;
+        people += 2;
+
+        result.innerHTML = `
+            <h3>你選擇了：全部重用</h3>
+
+            <p>
+                郭攸之、費禕、董允等人迅速進入朝廷核心。
+                他們能力出眾，行政效率明顯提升。
+            </p>
+
+            <p>
+                <strong>國力 +5　民心 +2</strong>
+            </p>
+
+            <p>
+                不久之後，朝臣們逐漸發現：
+                <br>
+                <strong>重要政務幾乎都掌握在丞相所信任的人手中。</strong>
+            </p>
+
+            <button onclick="nextRound3()">
+                下一回合 →
+            </button>
+        `;
+
+    }
+
+    else if (choice === 2) {
+
+        power += 3;
+        people += 3;
+
+        result.innerHTML = `
+            <h3>你選擇了：重用人才，但保留不同聲音</h3>
+
+            <p>
+                你任用了諸葛亮推薦的人才，
+                同時要求朝廷保留不同立場的官員參與討論。
+            </p>
+
+            <p>
+                <strong>國力 +3　民心 +3</strong>
+            </p>
+
+            <p>
+                決策速度稍微變慢，
+                但朝廷內部仍維持一定程度的平衡。
+            </p>
+
+            <button onclick="nextRound3()">
+                下一回合 →
+            </button>
+        `;
+
+    }
+
+    else if (choice === 3) {
+
+        power -= 2;
+        people += 1;
+
+        result.innerHTML = `
+            <h3>你選擇了：刻意提拔其他官員</h3>
+
+            <p>
+                你開始提拔一些不屬於丞相系統的官員，
+                希望形成新的政治平衡。
+            </p>
+
+            <p>
+                <strong>國力 -2　民心 +1</strong>
+            </p>
+
+            <p>
+                朝廷中的權力更加分散，
+                但部分政務開始出現協調上的問題。
+            </p>
+
+            <p>
+                有人私下說：
+                <br>
+                <strong>「陛下似乎開始有意牽制丞相。」</strong>
+            </p>
+
+            <button onclick="nextRound3()">
+                下一回合 →
+            </button>
+        `;
+
+    }
+
+    updateDisplay();
+
+    result.classList.remove("hidden");
+
+}
+
+
+// =========================
+// 第三回合結束
+// =========================
+
+function nextRound3() {
+
+    alert("第三回合完成！接下來將進入軍隊問題。");
+
+}
     function updateDisplay() {
 
         document.getElementById("power").innerText = power;
