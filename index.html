@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>出師表：蜀漢危機</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Noto Sans TC", Arial, sans-serif;
+            background: #eee9df;
+            color: #332b22;
+        }
+
+        .game {
+            max-width: 850px;
+            margin: auto;
+            padding: 30px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #776b5d;
+            margin-bottom: 30px;
+        }
+
+        /* 開始畫面 */
+
+        #start-screen {
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        #start-screen h1 {
+            font-size: 42px;
+        }
+
+        .intro {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            line-height: 1.8;
+        }
+
+        /* 資源 */
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .resource {
+            background: white;
+            border-radius: 12px;
+            padding: 15px 5px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+        }
+
+        .resource-name {
+            font-size: 14px;
+            color: #776b5d;
+        }
+
+        .resource-value {
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        /* 回合 */
+
+        .round {
+            color: #8b5e34;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .event {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .event h2 {
+            margin-top: 0;
+        }
+
+        .quote {
+            background: #f5f0e7;
+            padding: 20px;
+            border-left: 5px solid #9b7955;
+            line-height: 1.9;
+            margin: 20px 0;
+        }
+
+        /* 選項 */
+
+        .choices {
+            display: grid;
+            gap: 12px;
+        }
+
+        .choice {
+            background: white;
+            border: 2px solid #ddd4c7;
+            border-radius: 12px;
+            padding: 18px;
+            text-align: left;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .choice:hover {
+            transform: translateY(-2px);
+            border-color: #9b7955;
+        }
+
+        .choice strong {
+            font-size: 18px;
+        }
+
+        /* 結果 */
+
+        #result {
+            background: #fff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+            line-height: 1.8;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        button {
+            background: #4c4034;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 15px 35px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        @media (max-width: 600px) {
+            .resources {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="game">
+
+    <!-- 開始畫面 -->
+
+    <div id="start-screen">
+
+        <h1>🏯 出師表：蜀漢危機</h1>
+
+        <div class="subtitle">
+            西元 227 年・蜀漢
+        </div>
+
+        <div class="intro">
+
+            <p>
+                先帝劉備已逝，蜀漢國勢未穩。
+            </p>
+
+            <p>
+                丞相諸葛亮即將率軍北伐，
+                但朝廷內部仍有許多問題等待解決。
+            </p>
+
+            <p>
+                <strong>
+                    現在，你是劉禪。
+                </strong>
+            </p>
+
+            <p>
+                你將如何治理這個國家？
+            </p>
+
+        </div>
+
+        <button onclick="startGame()">
+            開始遊戲
+        </button>
+
+    </div>
+
+
+    <!-- 遊戲畫面 -->
+
+    <div id="game-screen" class="hidden">
+
+        <h1>🏯 蜀漢朝廷</h1>
+
+        <div class="subtitle">
+            你的每一個決定，都可能改變蜀漢的命運。
+        </div>
+
+
+        <!-- 資源 -->
+
+        <div class="resources">
+
+            <div class="resource">
+                <div class="resource-name">🏯 國力</div>
+                <div class="resource-value" id="power">60</div>
+            </div>
+
+            <div class="resource">
+                <div class="resource-name">⚔️ 軍力</div>
+                <div class="resource-value" id="army">50</div>
+            </div>
+
+            <div class="resource">
+                <div class="resource-name">🌾 糧草</div>
+                <div class="resource-value" id="food">50</div>
+            </div>
+
+            <div class="resource">
+                <div class="resource-name">❤️ 民心</div>
+                <div class="resource-value" id="people">60</div>
+            </div>
+
+        </div>
+
+
+        <!-- 第一回合 -->
+
+        <div class="round">
+            第一回合・先帝留下的重臣
+        </div>
+
+        <div class="event">
+
+            <h2>「受任於敗軍之際」</h2>
+
+            <p>
+                先帝劉備去世後，諸葛亮繼續輔佐你治理蜀漢。
+                他掌握軍政大權，也準備開始北伐。
+            </p>
+
+            <div class="quote">
+
+                「受任於敗軍之際，奉命於危難之間，
+                爾來二十有一年矣。」
+
+            </div>
+
+            <p>
+                你必須決定：<br>
+                <strong>你要給諸葛亮多少權力？</strong>
+            </p>
+
+
+            <div class="choices">
+
+                <div class="choice" onclick="choose(1)">
+                    <strong>A｜完全信任諸葛亮</strong>
+                    <br><br>
+                    既然先帝如此信任他，朕也應當充分授權。
+                </div>
+
+                <div class="choice" onclick="choose(2)">
+                    <strong>B｜信任，但保留監督</strong>
+                    <br><br>
+                    丞相能力出眾，但國家大事仍需要相互制衡。
+                </div>
+
+                <div class="choice" onclick="choose(3)">
+                    <strong>C｜限制丞相權力</strong>
+                    <br><br>
+                    蜀漢不能讓任何一位臣子的權力過度集中。
+                </div>
+
+            </div>
+
+
+            <div id="result" class="hidden"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    // 遊戲數值
+
+    let power = 60;
+    let army = 50;
+    let food = 50;
+    let people = 60;
+
+
+    // 開始遊戲
+
+    function startGame() {
+
+        document.getElementById("start-screen").classList.add("hidden");
+
+        document.getElementById("game-screen").classList.remove("hidden");
+
+    }
+
+
+    // 玩家選擇
+
+    function choose(choice) {
+
+        let result = document.getElementById("result");
+
+        if (choice === 1) {
+
+            power += 5;
+            people += 3;
+
+            result.innerHTML = `
+                <h3>你選擇了：完全信任諸葛亮</h3>
+
+                <p>
+                    諸葛亮獲得了更大的施政空間。
+                    朝廷政令開始更加迅速。
+                </p>
+
+                <p>
+                    <strong>國力 +5　民心 +3</strong>
+                </p>
+
+                <p>
+                    但你沒有注意到一件事情……
+                    <br>
+                    <strong>諸葛亮在朝廷中的影響力正在增加。</strong>
+                </p>
+            `;
+
+        }
+
+
+        else if (choice === 2) {
+
+            power += 3;
+            people += 2;
+
+            result.innerHTML = `
+                <h3>你選擇了：信任，但保留監督</h3>
+
+                <p>
+                    你接受諸葛亮的才能，
+                    同時要求重要政務仍需經過朝廷討論。
+                </p>
+
+                <p>
+                    <strong>國力 +3　民心 +2</strong>
+                </p>
+
+                <p>
+                    君臣之間維持了一定的距離，
+                    但也保留了合作的空間。
+                </p>
+            `;
+
+        }
+
+
+        else if (choice === 3) {
+
+            power -= 3;
+            people += 1;
+
+            result.innerHTML = `
+                <h3>你選擇了：限制丞相權力</h3>
+
+                <p>
+                    你認為皇帝不能把國政完全交給任何一位臣子。
+                </p>
+
+                <p>
+                    <strong>國力 -3　民心 +1</strong>
+                </p>
+
+                <p>
+                    皇權更加穩固。
+                    <br>
+                    但諸葛亮開始思考：
+                    <strong>陛下是否真的信任臣？</strong>
+                </p>
+            `;
+
+        }
+
+
+        updateDisplay();
+
+        result.classList.remove("hidden");
+
+    }
+
+
+    // 更新畫面上的數值
+
+    function updateDisplay() {
+
+        document.getElementById("power").innerText = power;
+
+        document.getElementById("army").innerText = army;
+
+        document.getElementById("food").innerText = food;
+
+        document.getElementById("people").innerText = people;
+
+    }
+
+</script>
+
+</body>
+
+</html>
