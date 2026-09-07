@@ -32,7 +32,10 @@
             margin-bottom: 30px;
         }
 
-        /* 開始畫面 */
+
+        /* =========================
+           開始畫面
+        ========================= */
 
         #start-screen {
             text-align: center;
@@ -51,7 +54,10 @@
             line-height: 1.8;
         }
 
-        /* 資源 */
+
+        /* =========================
+           資源
+        ========================= */
 
         .resources {
             display: grid;
@@ -79,7 +85,10 @@
             margin-top: 5px;
         }
 
-        /* 回合 */
+
+        /* =========================
+           回合
+        ========================= */
 
         .round {
             color: #8b5e34;
@@ -106,7 +115,10 @@
             margin: 20px 0;
         }
 
-        /* 選項 */
+
+        /* =========================
+           選項
+        ========================= */
 
         .choices {
             display: grid;
@@ -132,15 +144,102 @@
             font-size: 18px;
         }
 
-        /* 結果 */
 
-        #result {
-            background: #fff;
+        /* =========================
+           結果
+        ========================= */
+
+        #result,
+        #result2,
+        #result3 {
+            background: #faf7f1;
             border-radius: 15px;
             padding: 25px;
             margin-top: 20px;
             line-height: 1.8;
+            border: 1px solid #ddd4c7;
         }
+
+
+        /* =========================
+           決策影響樹
+        ========================= */
+
+        .impact-tree {
+            margin: 28px 0;
+            padding: 22px 15px;
+            background: #f5f0e7;
+            border-radius: 14px;
+            text-align: center;
+        }
+
+        .impact-title {
+            font-size: 14px;
+            color: #776b5d;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+        }
+
+        .impact-decision {
+            font-size: 19px;
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+
+        .tree-line {
+            font-size: 24px;
+            line-height: 1;
+            color: #9b7955;
+        }
+
+        .impact-items {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 5px;
+        }
+
+        .impact-item {
+            background: white;
+            border-radius: 12px;
+            padding: 13px 8px;
+            min-height: 72px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .impact-name {
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .impact-arrow {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .up {
+            color: #42734c;
+        }
+
+        .down {
+            color: #984d45;
+        }
+
+        .neutral {
+            color: #806b4f;
+        }
+
+        .mystery {
+            color: #695b84;
+        }
+
+
+        /* =========================
+           按鈕
+        ========================= */
 
         .hidden {
             display: none;
@@ -161,19 +260,47 @@
             opacity: 0.85;
         }
 
+
+        /* =========================
+           手機版
+        ========================= */
+
         @media (max-width: 600px) {
+
             .resources {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            #start-screen h1 {
+                font-size: 32px;
+            }
+
+            .impact-items {
+                grid-template-columns: 1fr;
+            }
+
+            .tree-line {
+                display: none;
+            }
+
+            .impact-decision {
+                margin-bottom: 15px;
+            }
+
         }
+
     </style>
 </head>
+
 
 <body>
 
 <div class="game">
 
-    <!-- 開始畫面 -->
+
+    <!-- =========================
+         開始畫面
+    ========================= -->
 
     <div id="start-screen">
 
@@ -195,9 +322,7 @@
             </p>
 
             <p>
-                <strong>
-                    現在，你是劉禪。
-                </strong>
+                <strong>現在，你是劉禪。</strong>
             </p>
 
             <p>
@@ -213,7 +338,10 @@
     </div>
 
 
-    <!-- 遊戲畫面 -->
+
+    <!-- =========================
+         遊戲畫面
+    ========================= -->
 
     <div id="game-screen" class="hidden">
 
@@ -251,7 +379,10 @@
         </div>
 
 
-        <!-- 第一回合 -->
+
+        <!-- =========================
+             第一回合
+        ========================= -->
 
         <div id="round1">
 
@@ -269,17 +400,14 @@
                 </p>
 
                 <div class="quote">
-
                     「受任於敗軍之際，奉命於危難之間，
                     爾來二十有一年矣。」
-
                 </div>
 
                 <p>
                     你必須決定：<br>
                     <strong>你要給諸葛亮多少權力？</strong>
                 </p>
-
 
                 <div class="choices">
 
@@ -310,7 +438,10 @@
         </div>
 
 
-        <!-- 第二回合 -->
+
+        <!-- =========================
+             第二回合
+        ========================= -->
 
         <div id="round2" class="hidden">
 
@@ -328,10 +459,8 @@
                 </p>
 
                 <div class="quote">
-
                     「親賢臣，遠小人，此先漢所以興隆也；
                     親小人，遠賢臣，此後漢所以傾頹也。」
-
                 </div>
 
                 <p>
@@ -343,6 +472,7 @@
                 <p>
                     <strong>你會怎麼做？</strong>
                 </p>
+
 
                 <div class="choices">
 
@@ -373,7 +503,12 @@
             </div>
 
         </div>
-        <!-- 第三回合 -->
+
+
+
+        <!-- =========================
+             第三回合
+        ========================= -->
 
         <div id="round3" class="hidden">
 
@@ -409,6 +544,7 @@
                     <strong>你決定如何安排這批人才？</strong>
                 </p>
 
+
                 <div class="choices">
 
                     <div class="choice" onclick="chooseRound3(1)">
@@ -421,7 +557,8 @@
                     <div class="choice" onclick="chooseRound3(2)">
                         <strong>B｜重用人才，但保留不同聲音</strong>
                         <br><br>
-                        任用郭攸之等人，同時保留其他官員參與決策。
+                        任用郭攸之等人，
+                        同時保留其他官員參與決策。
                     </div>
 
                     <div class="choice" onclick="chooseRound3(3)">
@@ -438,9 +575,12 @@
             </div>
 
         </div>
+
+
     </div>
 
 </div>
+
 
 
 <script>
@@ -455,6 +595,7 @@
     let people = 60;
 
 
+
     // =========================
     // 開始遊戲
     // =========================
@@ -466,6 +607,7 @@
         document.getElementById("game-screen").classList.remove("hidden");
 
     }
+
 
 
     // =========================
@@ -482,16 +624,22 @@
             people += 3;
 
             result.innerHTML = `
+
                 <h3>你選擇了：完全信任諸葛亮</h3>
 
                 <p>
-                    諸葛亮獲得了更大的施政空間。
+                    諸葛亮獲得了更大的施政空間，
                     朝廷政令開始更加迅速。
                 </p>
 
-                <p>
-                    <strong>國力 +5　民心 +3</strong>
-                </p>
+                ${impactTree(
+                    "完全信任諸葛亮",
+                    [
+                        ["🏯 國力", "↑", "up"],
+                        ["❤️ 民心", "↑", "up"],
+                        ["🧠 朝廷權力結構", "？", "mystery"]
+                    ]
+                )}
 
                 <p>
                     但你沒有注意到一件事情……
@@ -513,6 +661,7 @@
             people += 2;
 
             result.innerHTML = `
+
                 <h3>你選擇了：信任，但保留監督</h3>
 
                 <p>
@@ -520,9 +669,14 @@
                     同時要求重要政務仍需經過朝廷討論。
                 </p>
 
-                <p>
-                    <strong>國力 +3　民心 +2</strong>
-                </p>
+                ${impactTree(
+                    "信任，但保留監督",
+                    [
+                        ["🏯 國力", "↑", "up"],
+                        ["❤️ 民心", "↑", "up"],
+                        ["⚖️ 權力平衡", "↑", "up"]
+                    ]
+                )}
 
                 <p>
                     君臣之間維持了一定的距離，
@@ -543,15 +697,21 @@
             people += 1;
 
             result.innerHTML = `
+
                 <h3>你選擇了：限制丞相權力</h3>
 
                 <p>
                     你認為皇帝不能把國政完全交給任何一位臣子。
                 </p>
 
-                <p>
-                    <strong>國力 -3　民心 +1</strong>
-                </p>
+                ${impactTree(
+                    "限制丞相權力",
+                    [
+                        ["🏯 國力", "↓", "down"],
+                        ["❤️ 民心", "↑", "up"],
+                        ["👑 皇權", "↑", "up"]
+                    ]
+                )}
 
                 <p>
                     皇權更加穩固。
@@ -567,12 +727,12 @@
 
         }
 
-
         updateDisplay();
 
         result.classList.remove("hidden");
 
     }
+
 
 
     // =========================
@@ -593,6 +753,7 @@
     }
 
 
+
     // =========================
     // 第二回合
     // =========================
@@ -607,6 +768,7 @@
             people += 2;
 
             result.innerHTML = `
+
                 <h3>你選擇了：完全採納諸葛亮的建議</h3>
 
                 <p>
@@ -614,14 +776,21 @@
                     政令推行變得更加順暢。
                 </p>
 
-                <p>
-                    <strong>國力 +4　民心 +2</strong>
-                </p>
+                ${impactTree(
+                    "完全採納丞相建議",
+                    [
+                        ["🏯 國力", "↑", "up"],
+                        ["❤️ 民心", "↑", "up"],
+                        ["🧠 丞相影響力", "？", "mystery"]
+                    ]
+                )}
 
                 <p>
                     只是，朝廷中開始有人注意到：
                     <br>
-                    <strong>越來越多重要官員，都是丞相推薦的人。</strong>
+                    <strong>
+                        越來越多重要官員，都是丞相推薦的人。
+                    </strong>
                 </p>
 
                 <button onclick="nextRound2()">
@@ -630,6 +799,7 @@
             `;
 
         }
+
 
         else if (choice === 2) {
 
@@ -637,6 +807,7 @@
             people += 3;
 
             result.innerHTML = `
+
                 <h3>你選擇了：參考諸葛亮，但由朕最後決定</h3>
 
                 <p>
@@ -644,14 +815,21 @@
                     再決定是否任用。
                 </p>
 
-                <p>
-                    <strong>國力 +2　民心 +3</strong>
-                </p>
+                ${impactTree(
+                    "由皇帝最後決定",
+                    [
+                        ["🏯 國力", "↑", "up"],
+                        ["❤️ 民心", "↑", "up"],
+                        ["👑 皇權", "↑", "up"]
+                    ]
+                )}
 
                 <p>
                     朝廷開始習慣一件事情：
                     <br>
-                    <strong>丞相提供意見，但最後的決定仍然在皇帝手中。</strong>
+                    <strong>
+                        丞相提供意見，但最後決定仍在皇帝手中。
+                    </strong>
                 </p>
 
                 <button onclick="nextRound2()">
@@ -661,22 +839,29 @@
 
         }
 
+
         else if (choice === 3) {
 
             power -= 2;
             people += 1;
 
             result.innerHTML = `
+
                 <h3>你選擇了：避免讓丞相主導所有人事</h3>
 
                 <p>
-                    你開始親自審核更多官員。
+                    你開始親自審核更多官員，
                     朝廷中的權力分配更加分散。
                 </p>
 
-                <p>
-                    <strong>國力 -2　民心 +1</strong>
-                </p>
+                ${impactTree(
+                    "限制丞相的人事權",
+                    [
+                        ["🏯 國力", "↓", "down"],
+                        ["❤️ 民心", "↑", "up"],
+                        ["👑 皇權", "↑", "up"]
+                    ]
+                )}
 
                 <p>
                     但諸葛亮似乎有些失望。
@@ -698,145 +883,234 @@
     }
 
 
-    // =========================
-    // 第二回合結束
-    // =========================
-
-   function nextRound2() {
-
-    document.getElementById("round2").classList.add("hidden");
-
-    document.getElementById("round3").classList.remove("hidden");
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-
-}
-
 
     // =========================
-    // 更新畫面上的數值
+    // 前往第三回合
     // =========================
-// =========================
-// 第三回合
-// =========================
 
-function chooseRound3(choice) {
+    function nextRound2() {
 
-    let result = document.getElementById("result3");
+        document.getElementById("round2").classList.add("hidden");
 
-    if (choice === 1) {
+        document.getElementById("round3").classList.remove("hidden");
 
-        power += 5;
-        people += 2;
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
 
-        result.innerHTML = `
-            <h3>你選擇了：全部重用</h3>
+    }
 
-            <p>
-                郭攸之、費禕、董允等人迅速進入朝廷核心。
-                他們能力出眾，行政效率明顯提升。
-            </p>
 
-            <p>
-                <strong>國力 +5　民心 +2</strong>
-            </p>
 
-            <p>
-                不久之後，朝臣們逐漸發現：
-                <br>
-                <strong>重要政務幾乎都掌握在丞相所信任的人手中。</strong>
-            </p>
+    // =========================
+    // 第三回合
+    // =========================
 
-            <button onclick="nextRound3()">
-                下一回合 →
-            </button>
+    function chooseRound3(choice) {
+
+        let result = document.getElementById("result3");
+
+
+        if (choice === 1) {
+
+            power += 5;
+            people += 2;
+
+            result.innerHTML = `
+
+                <h3>你選擇了：全部重用</h3>
+
+                <p>
+                    郭攸之、費禕、董允等人迅速進入朝廷核心。
+                    他們能力出眾，行政效率明顯提升。
+                </p>
+
+                ${impactTree(
+                    "全部重用",
+                    [
+                        ["🏯 國力", "↑", "up"],
+                        ["❤️ 民心", "↑", "up"],
+                        ["🧠 朝廷權力結構", "？", "mystery"]
+                    ]
+                )}
+
+                <p>
+                    不久之後，朝臣們逐漸發現：
+                    <br>
+                    <strong>
+                        重要政務幾乎都掌握在丞相所信任的人手中。
+                    </strong>
+                </p>
+
+                <button onclick="nextRound3()">
+                    下一回合 →
+                </button>
+            `;
+
+        }
+
+
+        else if (choice === 2) {
+
+            power += 3;
+            people += 3;
+
+            result.innerHTML = `
+
+                <h3>你選擇了：重用人才，但保留不同聲音</h3>
+
+                <p>
+                    你任用了諸葛亮推薦的人才，
+                    同時要求朝廷保留不同立場的官員參與討論。
+                </p>
+
+                ${impactTree(
+                    "重用人才，同時制衡",
+                    [
+                        ["🏯 國力", "↑", "up"],
+                        ["❤️ 民心", "↑", "up"],
+                        ["⚖️ 權力平衡", "↑", "up"]
+                    ]
+                )}
+
+                <p>
+                    決策速度稍微變慢，
+                    但朝廷內部仍維持一定程度的平衡。
+                </p>
+
+                <button onclick="nextRound3()">
+                    下一回合 →
+                </button>
+            `;
+
+        }
+
+
+        else if (choice === 3) {
+
+            power -= 2;
+            people += 1;
+
+            result.innerHTML = `
+
+                <h3>你選擇了：刻意提拔其他官員</h3>
+
+                <p>
+                    你開始提拔一些不屬於丞相系統的官員，
+                    希望形成新的政治平衡。
+                </p>
+
+                ${impactTree(
+                    "提拔其他官員",
+                    [
+                        ["🏯 國力", "↓", "down"],
+                        ["❤️ 民心", "↑", "up"],
+                        ["👑 皇權", "↑", "up"]
+                    ]
+                )}
+
+                <p>
+                    朝廷中的權力更加分散，
+                    但部分政務開始出現協調上的問題。
+                </p>
+
+                <p>
+                    有人私下說：
+                    <br>
+                    <strong>「陛下似乎開始有意牽制丞相。」</strong>
+                </p>
+
+                <button onclick="nextRound3()">
+                    下一回合 →
+                </button>
+            `;
+
+        }
+
+        updateDisplay();
+
+        result.classList.remove("hidden");
+
+    }
+
+
+
+    // =========================
+    // 第三回合結束
+    // =========================
+
+    function nextRound3() {
+
+        alert("第三回合完成！接下來將進入軍隊問題。");
+
+    }
+
+
+
+    // =========================
+    // 製作影響樹
+    // =========================
+
+    function impactTree(decision, items) {
+
+        let itemHTML = "";
+
+        items.forEach(function(item) {
+
+            itemHTML += `
+                <div class="impact-item">
+
+                    <div class="impact-name">
+                        ${item[0]}
+                    </div>
+
+                    <div class="impact-arrow ${item[2]}">
+                        ${item[1]}
+                    </div>
+
+                </div>
+            `;
+
+        });
+
+
+        return `
+
+            <div class="impact-tree">
+
+                <div class="impact-title">
+                    決策影響
+                </div>
+
+                <div class="impact-decision">
+                    ${decision}
+                </div>
+
+                <div class="tree-line">
+                    │
+                </div>
+
+                <div class="tree-line">
+                    ┌────────┼────────┐
+                </div>
+
+                <div class="impact-items">
+                    ${itemHTML}
+                </div>
+
+            </div>
+
         `;
 
     }
 
-    else if (choice === 2) {
-
-        power += 3;
-        people += 3;
-
-        result.innerHTML = `
-            <h3>你選擇了：重用人才，但保留不同聲音</h3>
-
-            <p>
-                你任用了諸葛亮推薦的人才，
-                同時要求朝廷保留不同立場的官員參與討論。
-            </p>
-
-            <p>
-                <strong>國力 +3　民心 +3</strong>
-            </p>
-
-            <p>
-                決策速度稍微變慢，
-                但朝廷內部仍維持一定程度的平衡。
-            </p>
-
-            <button onclick="nextRound3()">
-                下一回合 →
-            </button>
-        `;
-
-    }
-
-    else if (choice === 3) {
-
-        power -= 2;
-        people += 1;
-
-        result.innerHTML = `
-            <h3>你選擇了：刻意提拔其他官員</h3>
-
-            <p>
-                你開始提拔一些不屬於丞相系統的官員，
-                希望形成新的政治平衡。
-            </p>
-
-            <p>
-                <strong>國力 -2　民心 +1</strong>
-            </p>
-
-            <p>
-                朝廷中的權力更加分散，
-                但部分政務開始出現協調上的問題。
-            </p>
-
-            <p>
-                有人私下說：
-                <br>
-                <strong>「陛下似乎開始有意牽制丞相。」</strong>
-            </p>
-
-            <button onclick="nextRound3()">
-                下一回合 →
-            </button>
-        `;
-
-    }
-
-    updateDisplay();
-
-    result.classList.remove("hidden");
-
-}
 
 
-// =========================
-// 第三回合結束
-// =========================
+    // =========================
+    // 更新畫面數值
+    // =========================
 
-function nextRound3() {
-
-    alert("第三回合完成！接下來將進入軍隊問題。");
-
-}
     function updateDisplay() {
 
         document.getElementById("power").innerText = power;
@@ -850,6 +1124,7 @@ function nextRound3() {
     }
 
 </script>
+
 
 </body>
 
