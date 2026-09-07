@@ -32,7 +32,9 @@
             margin-bottom: 30px;
         }
 
-        /* 開始畫面 */
+        /* =========================
+           開始畫面
+        ========================= */
 
         #start-screen {
             text-align: center;
@@ -51,7 +53,9 @@
             line-height: 1.8;
         }
 
-        /* 國家狀態 */
+        /* =========================
+           國家狀態
+        ========================= */
 
         .status-title {
             font-size: 14px;
@@ -86,7 +90,9 @@
             margin-top: 8px;
         }
 
-        /* 回合 */
+        /* =========================
+           回合
+        ========================= */
 
         .round {
             color: #8b5e34;
@@ -113,7 +119,9 @@
             margin: 20px 0;
         }
 
-        /* 選項 */
+        /* =========================
+           選項
+        ========================= */
 
         .choices {
             display: grid;
@@ -139,11 +147,26 @@
             font-size: 18px;
         }
 
-        /* 結果 */
+        /* 已經作答後 */
+        .choices.locked .choice {
+            pointer-events: none;
+            opacity: 0.55;
+        }
+
+        .choices.locked .choice.selected {
+            opacity: 1;
+            border-color: #8b5e34;
+            background: #f7f1e8;
+        }
+
+        /* =========================
+           結果
+        ========================= */
 
         #result,
         #result2,
-        #result3 {
+        #result3,
+        #result4 {
             background: #faf7f1;
             border-radius: 15px;
             padding: 25px;
@@ -152,7 +175,9 @@
             border: 1px solid #ddd4c7;
         }
 
-        /* 決策影響樹 */
+        /* =========================
+           決策影響樹
+        ========================= */
 
         .impact-tree {
             margin: 28px 0;
@@ -225,7 +250,9 @@
             color: #695b84;
         }
 
-        /* 按鈕 */
+        /* =========================
+           其他
+        ========================= */
 
         .hidden {
             display: none;
@@ -245,8 +272,6 @@
         button:hover {
             opacity: 0.85;
         }
-
-        /* 手機版 */
 
         @media (max-width: 600px) {
 
@@ -279,7 +304,9 @@
 
 <div class="game">
 
-    <!-- 開始畫面 -->
+    <!-- =========================
+         開始畫面
+    ========================= -->
 
     <div id="start-screen">
 
@@ -292,12 +319,12 @@
         <div class="intro">
 
             <p>
-                先帝劉備已逝，蜀漢國勢未穩。
+                先帝劉備已逝，天下三分，益州疲弊。
             </p>
 
             <p>
                 丞相諸葛亮即將率軍北伐，
-                但朝廷內部仍有許多問題等待解決。
+                但蜀漢國勢衰弱，朝廷內外仍有許多問題等待解決。
             </p>
 
             <p>
@@ -305,7 +332,8 @@
             </p>
 
             <p>
-                你將如何治理這個國家？
+                在這「危急存亡之秋」，<br>
+                你將如何治理蜀漢？
             </p>
 
         </div>
@@ -317,7 +345,9 @@
     </div>
 
 
-    <!-- 遊戲畫面 -->
+    <!-- =========================
+         遊戲畫面
+    ========================= -->
 
     <div id="game-screen" class="hidden">
 
@@ -335,12 +365,12 @@
 
             <div class="resource">
                 <div class="resource-name">🏯 國力</div>
-                <div class="resource-value" id="power">穩定</div>
+                <div class="resource-value" id="power">衰弱</div>
             </div>
 
             <div class="resource">
                 <div class="resource-name">⚔️ 軍力</div>
-                <div class="resource-value" id="army">尚可</div>
+                <div class="resource-value" id="army">薄弱</div>
             </div>
 
             <div class="resource">
@@ -356,7 +386,9 @@
         </div>
 
 
-        <!-- 第一回合 -->
+        <!-- =========================
+             第一回合
+        ========================= -->
 
         <div id="round1">
 
@@ -379,25 +411,26 @@
                 </div>
 
                 <p>
-                    你必須決定：<br>
+                    你必須決定：
+                    <br>
                     <strong>你要給諸葛亮多少權力？</strong>
                 </p>
 
-                <div class="choices">
+                <div class="choices" id="choices1">
 
-                    <div class="choice" onclick="choose(1)">
+                    <div class="choice" onclick="choose(1, this)">
                         <strong>A｜完全信任諸葛亮</strong>
                         <br><br>
                         既然先帝如此信任他，朕也應當充分授權。
                     </div>
 
-                    <div class="choice" onclick="choose(2)">
+                    <div class="choice" onclick="choose(2, this)">
                         <strong>B｜信任，但保留監督</strong>
                         <br><br>
                         丞相能力出眾，但國家大事仍需要相互制衡。
                     </div>
 
-                    <div class="choice" onclick="choose(3)">
+                    <div class="choice" onclick="choose(3, this)">
                         <strong>C｜限制丞相權力</strong>
                         <br><br>
                         蜀漢不能讓任何一位臣子的權力過度集中。
@@ -412,7 +445,9 @@
         </div>
 
 
-        <!-- 第二回合 -->
+        <!-- =========================
+             第二回合
+        ========================= -->
 
         <div id="round2" class="hidden">
 
@@ -444,22 +479,22 @@
                     <strong>你會怎麼做？</strong>
                 </p>
 
-                <div class="choices">
+                <div class="choices" id="choices2">
 
-                    <div class="choice" onclick="chooseRound2(1)">
+                    <div class="choice" onclick="chooseRound2(1, this)">
                         <strong>A｜完全採納諸葛亮的用人建議</strong>
                         <br><br>
                         丞相最了解國政，既然他推薦的人才，
                         就應該放心任用。
                     </div>
 
-                    <div class="choice" onclick="chooseRound2(2)">
+                    <div class="choice" onclick="chooseRound2(2, this)">
                         <strong>B｜參考諸葛亮，但由朕最後決定</strong>
                         <br><br>
                         賢臣固然重要，但皇帝也必須親自了解臣下。
                     </div>
 
-                    <div class="choice" onclick="chooseRound2(3)">
+                    <div class="choice" onclick="chooseRound2(3, this)">
                         <strong>C｜避免讓丞相主導所有人事</strong>
                         <br><br>
                         即使是賢能的丞相，也不能讓朝廷所有官員
@@ -475,7 +510,9 @@
         </div>
 
 
-        <!-- 第三回合 -->
+        <!-- =========================
+             第三回合
+        ========================= -->
 
         <div id="round3" class="hidden">
 
@@ -511,23 +548,23 @@
                     <strong>你決定如何安排這批人才？</strong>
                 </p>
 
-                <div class="choices">
+                <div class="choices" id="choices3">
 
-                    <div class="choice" onclick="chooseRound3(1)">
+                    <div class="choice" onclick="chooseRound3(1, this)">
                         <strong>A｜全部重用</strong>
                         <br><br>
                         既然是先帝留下、丞相認可的人才，
                         沒有理由不用。
                     </div>
 
-                    <div class="choice" onclick="chooseRound3(2)">
+                    <div class="choice" onclick="chooseRound3(2, this)">
                         <strong>B｜重用人才，但保留不同聲音</strong>
                         <br><br>
                         任用郭攸之等人，
                         同時保留其他官員參與決策。
                     </div>
 
-                    <div class="choice" onclick="chooseRound3(3)">
+                    <div class="choice" onclick="chooseRound3(3, this)">
                         <strong>C｜刻意提拔非丞相系統的官員</strong>
                         <br><br>
                         朝廷需要平衡。
@@ -542,6 +579,80 @@
 
         </div>
 
+
+        <!-- =========================
+             第四回合
+        ========================= -->
+
+        <div id="round4" class="hidden">
+
+            <div class="round">
+                第四回合・軍隊由誰掌握
+            </div>
+
+            <div class="event">
+
+                <h2>「將軍向寵，性行淑均，曉暢軍事」</h2>
+
+                <p>
+                    諸葛亮向你推薦將軍向寵，
+                    認為他熟悉軍事，而且過去已經證明自己的能力。
+                </p>
+
+                <div class="quote">
+                    「將軍向寵，性行淑均，曉暢軍事，
+                    試用於昔日，先帝稱之曰能，
+                    是以眾議舉寵為督。」
+                </div>
+
+                <p>
+                    軍中將領大多認同向寵的能力。
+                    若由他整頓軍隊，軍令應能更加統一。
+                </p>
+
+                <p>
+                    但一名近臣提醒你：
+                </p>
+
+                <p>
+                    「陛下，如今朝中大臣多由丞相推薦，
+                    若軍隊也交給丞相信任的人，
+                    朝廷與軍隊豈不都繫於一人？」
+                </p>
+
+                <p>
+                    <strong>你要如何處理向寵的任命？</strong>
+                </p>
+
+                <div class="choices" id="choices4">
+
+                    <div class="choice" onclick="chooseRound4(1, this)">
+                        <strong>A｜完全授權向寵整頓軍隊</strong>
+                        <br><br>
+                        既然先帝與眾將都認可他的能力，
+                        就應讓專業的人處理軍務。
+                    </div>
+
+                    <div class="choice" onclick="chooseRound4(2, this)">
+                        <strong>B｜任用向寵，但軍權仍由皇帝監督</strong>
+                        <br><br>
+                        專業歸專業，但調兵與重大軍令仍須奏報朝廷。
+                    </div>
+
+                    <div class="choice" onclick="chooseRound4(3, this)">
+                        <strong>C｜另提拔一名將領共同掌軍</strong>
+                        <br><br>
+                        即使效率稍低，也應避免軍權集中於單一系統。
+                    </div>
+
+                </div>
+
+                <div id="result4" class="hidden"></div>
+
+            </div>
+
+        </div>
+
     </div>
 
 </div>
@@ -549,19 +660,38 @@
 
 <script>
 
-    // =========================
-    // 真實數值（玩家看不到）
-    // =========================
+    // ==================================================
+    // 玩家看不到的真實國家數值
+    // ==================================================
 
-    let power = 60;
-    let army = 50;
-    let food = 50;
-    let people = 60;
+    let power = 35;
+    let army = 35;
+    let food = 45;
+    let people = 55;
 
 
-    // =========================
+    // ==================================================
+    // 隱藏政治數值
+    // ==================================================
+
+    let zhugeInfluence = 50;
+    let emperorAuthority = 50;
+    let trust = 50;
+
+
+    // ==================================================
+    // 防止同一回合重複選擇
+    // ==================================================
+
+    let round1Chosen = false;
+    let round2Chosen = false;
+    let round3Chosen = false;
+    let round4Chosen = false;
+
+
+    // ==================================================
     // 開始遊戲
-    // =========================
+    // ==================================================
 
     function startGame() {
 
@@ -573,11 +703,34 @@
     }
 
 
-    // =========================
-    // 第一回合
-    // =========================
+    // ==================================================
+    // 鎖定選項
+    // ==================================================
 
-    function choose(choice) {
+    function lockChoices(containerId, selectedElement) {
+
+        let container = document.getElementById(containerId);
+
+        container.classList.add("locked");
+
+        if (selectedElement) {
+            selectedElement.classList.add("selected");
+        }
+
+    }
+
+
+    // ==================================================
+    // 第一回合
+    // ==================================================
+
+    function choose(choice, selectedElement) {
+
+        if (round1Chosen) return;
+
+        round1Chosen = true;
+
+        lockChoices("choices1", selectedElement);
 
         let result = document.getElementById("result");
 
@@ -585,6 +738,10 @@
 
             power += 5;
             people += 3;
+
+            zhugeInfluence += 8;
+            emperorAuthority -= 4;
+            trust += 6;
 
             result.innerHTML = `
 
@@ -620,6 +777,10 @@
             power += 3;
             people += 2;
 
+            zhugeInfluence += 3;
+            emperorAuthority += 2;
+            trust += 3;
+
             result.innerHTML = `
 
                 <h3>你選擇了：信任，但保留監督</h3>
@@ -652,6 +813,10 @@
 
             power -= 3;
             people += 1;
+
+            zhugeInfluence -= 6;
+            emperorAuthority += 8;
+            trust -= 7;
 
             result.innerHTML = `
 
@@ -693,19 +858,22 @@
         document.getElementById("round1").classList.add("hidden");
         document.getElementById("round2").classList.remove("hidden");
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+        scrollTop();
 
     }
 
 
-    // =========================
+    // ==================================================
     // 第二回合
-    // =========================
+    // ==================================================
 
-    function chooseRound2(choice) {
+    function chooseRound2(choice, selectedElement) {
+
+        if (round2Chosen) return;
+
+        round2Chosen = true;
+
+        lockChoices("choices2", selectedElement);
 
         let result = document.getElementById("result2");
 
@@ -713,6 +881,10 @@
 
             power += 4;
             people += 2;
+
+            zhugeInfluence += 7;
+            emperorAuthority -= 3;
+            trust += 4;
 
             result.innerHTML = `
 
@@ -748,6 +920,10 @@
             power += 2;
             people += 3;
 
+            zhugeInfluence += 2;
+            emperorAuthority += 4;
+            trust += 2;
+
             result.innerHTML = `
 
                 <h3>你選擇了：參考諸葛亮，但由朕最後決定</h3>
@@ -781,6 +957,10 @@
 
             power -= 2;
             people += 1;
+
+            zhugeInfluence -= 5;
+            emperorAuthority += 7;
+            trust -= 5;
 
             result.innerHTML = `
 
@@ -822,19 +1002,22 @@
         document.getElementById("round2").classList.add("hidden");
         document.getElementById("round3").classList.remove("hidden");
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+        scrollTop();
 
     }
 
 
-    // =========================
+    // ==================================================
     // 第三回合
-    // =========================
+    // ==================================================
 
-    function chooseRound3(choice) {
+    function chooseRound3(choice, selectedElement) {
+
+        if (round3Chosen) return;
+
+        round3Chosen = true;
+
+        lockChoices("choices3", selectedElement);
 
         let result = document.getElementById("result3");
 
@@ -842,6 +1025,10 @@
 
             power += 5;
             people += 2;
+
+            zhugeInfluence += 7;
+            emperorAuthority -= 4;
+            trust += 3;
 
             result.innerHTML = `
 
@@ -877,6 +1064,10 @@
             power += 3;
             people += 3;
 
+            zhugeInfluence += 3;
+            emperorAuthority += 3;
+            trust += 3;
+
             result.innerHTML = `
 
                 <h3>你選擇了：重用人才，但保留不同聲音</h3>
@@ -909,6 +1100,10 @@
 
             power -= 2;
             people += 1;
+
+            zhugeInfluence -= 5;
+            emperorAuthority += 7;
+            trust -= 4;
 
             result.innerHTML = `
 
@@ -952,14 +1147,175 @@
 
     function nextRound3() {
 
-        alert("第三回合完成！接下來將進入軍隊問題。");
+        document.getElementById("round3").classList.add("hidden");
+        document.getElementById("round4").classList.remove("hidden");
+
+        scrollTop();
 
     }
 
 
-    // =========================
+    // ==================================================
+    // 第四回合
+    // ==================================================
+
+    function chooseRound4(choice, selectedElement) {
+
+        if (round4Chosen) return;
+
+        round4Chosen = true;
+
+        lockChoices("choices4", selectedElement);
+
+        let result = document.getElementById("result4");
+
+        if (choice === 1) {
+
+            army += 8;
+            power += 2;
+
+            zhugeInfluence += 7;
+            emperorAuthority -= 5;
+            trust += 4;
+
+            result.innerHTML = `
+
+                <h3>你選擇了：完全授權向寵整頓軍隊</h3>
+
+                <p>
+                    向寵迅速重新整理軍令與部隊配置。
+                    將士對命令的執行更加一致，
+                    軍隊的戰鬥能力明顯提升。
+                </p>
+
+                ${impactTree(
+                    "完全授權向寵",
+                    [
+                        ["⚔️ 軍力", "↑", "up"],
+                        ["🏯 國力", "↑", "up"],
+                        ["🧠 軍政權力結構", "？", "mystery"]
+                    ]
+                )}
+
+                <p>
+                    軍中開始流傳一句話：
+                    <br>
+                    <strong>「內政問丞相，軍務問向將軍。」</strong>
+                </p>
+
+                <p>
+                    只是這兩個人，
+                    都是先帝與諸葛亮所信任的人。
+                </p>
+
+                <button onclick="nextRound4()">下一回合 →</button>
+            `;
+
+        }
+
+        else if (choice === 2) {
+
+            army += 5;
+            power += 2;
+
+            zhugeInfluence += 3;
+            emperorAuthority += 3;
+            trust += 2;
+
+            result.innerHTML = `
+
+                <h3>你選擇了：任用向寵，但保留軍權監督</h3>
+
+                <p>
+                    向寵負責日常軍務與訓練，
+                    但重大調兵仍必須由朝廷核准。
+                </p>
+
+                ${impactTree(
+                    "任用向寵，保留監督",
+                    [
+                        ["⚔️ 軍力", "↑", "up"],
+                        ["👑 皇權", "↑", "up"],
+                        ["🤝 君臣關係", "↑", "up"]
+                    ]
+                )}
+
+                <p>
+                    軍隊的效率有所提升，
+                    而皇帝對軍權仍保持一定掌握。
+                </p>
+
+                <p>
+                    諸葛亮沒有反對，
+                    只是提醒你：
+                    <br>
+                    <strong>「兵貴神速，層層奏報恐誤軍機。」</strong>
+                </p>
+
+                <button onclick="nextRound4()">下一回合 →</button>
+            `;
+
+        }
+
+        else if (choice === 3) {
+
+            army -= 2;
+            power -= 1;
+
+            zhugeInfluence -= 5;
+            emperorAuthority += 7;
+            trust -= 5;
+
+            result.innerHTML = `
+
+                <h3>你選擇了：另提拔將領共同掌軍</h3>
+
+                <p>
+                    你任命另一名將領與向寵共同負責軍務，
+                    希望彼此牽制。
+                </p>
+
+                ${impactTree(
+                    "分散軍權",
+                    [
+                        ["⚔️ 軍力", "↓", "down"],
+                        ["👑 皇權", "↑", "up"],
+                        ["🤝 君臣信任", "↓", "down"]
+                    ]
+                )}
+
+                <p>
+                    軍權更加分散，
+                    但兩套命令系統開始出現摩擦。
+                </p>
+
+                <p>
+                    一名將領忍不住抱怨：
+                    <br>
+                    <strong>「究竟該聽誰的？」</strong>
+                </p>
+
+                <button onclick="nextRound4()">下一回合 →</button>
+            `;
+
+        }
+
+        updateDisplay();
+        result.classList.remove("hidden");
+
+    }
+
+
+    function nextRound4() {
+
+        alert("第四回合完成！下一步將進入北伐決策。");
+
+    }
+
+
+    // ==================================================
     // 決策影響樹
-    // =========================
+    // ==================================================
 
     function impactTree(decision, items) {
 
@@ -968,6 +1324,7 @@
         items.forEach(function(item) {
 
             itemHTML += `
+
                 <div class="impact-item">
 
                     <div class="impact-name">
@@ -995,7 +1352,9 @@
                     ${decision}
                 </div>
 
-                <div class="tree-line">│</div>
+                <div class="tree-line">
+                    │
+                </div>
 
                 <div class="tree-line">
                     ┌────────┼────────┐
@@ -1006,15 +1365,14 @@
                 </div>
 
             </div>
-
         `;
 
     }
 
 
-    // =========================
-    // 把真正數字轉成玩家看到的狀態
-    // =========================
+    // ==================================================
+    // 將真正數字轉換成玩家看到的文字
+    // ==================================================
 
     function getPowerStatus(value) {
 
@@ -1027,6 +1385,7 @@
         }
 
         return "衰弱";
+
     }
 
 
@@ -1041,6 +1400,7 @@
         }
 
         return "薄弱";
+
     }
 
 
@@ -1055,6 +1415,7 @@
         }
 
         return "短缺";
+
     }
 
 
@@ -1069,12 +1430,13 @@
         }
 
         return "不安";
+
     }
 
 
-    // =========================
-    // 更新玩家看到的國家狀態
-    // =========================
+    // ==================================================
+    // 更新畫面
+    // ==================================================
 
     function updateDisplay() {
 
@@ -1089,6 +1451,20 @@
 
         document.getElementById("people").innerText =
             getPeopleStatus(people);
+
+    }
+
+
+    // ==================================================
+    // 回到頁面頂端
+    // ==================================================
+
+    function scrollTop() {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
 
     }
 
