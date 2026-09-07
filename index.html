@@ -18,12 +18,16 @@
         .game {
             max-width: 850px;
             margin: auto;
-            padding: 30px 20px;
+            padding: 30px 20px 70px;
         }
 
         h1 {
             text-align: center;
             margin-bottom: 10px;
+        }
+
+        h2 {
+            margin-top: 0;
         }
 
         .subtitle {
@@ -34,7 +38,7 @@
 
         #start-screen {
             text-align: center;
-            padding-top: 80px;
+            padding-top: 70px;
         }
 
         #start-screen h1 {
@@ -46,7 +50,7 @@
             padding: 30px;
             border-radius: 15px;
             margin: 30px 0;
-            line-height: 1.8;
+            line-height: 1.9;
         }
 
         .status-title {
@@ -93,11 +97,7 @@
             border-radius: 15px;
             padding: 25px;
             margin-bottom: 20px;
-            line-height: 1.75;
-        }
-
-        .event h2 {
-            margin-top: 0;
+            line-height: 1.8;
         }
 
         .quote {
@@ -148,7 +148,9 @@
         #result3,
         #result4,
         #result5,
-        #result6 {
+        #result6,
+        #result7,
+        #result8 {
             background: #faf7f1;
             border-radius: 15px;
             padding: 25px;
@@ -198,7 +200,6 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
         .impact-name {
@@ -256,6 +257,65 @@
             margin: 20px 0;
         }
 
+        .ending-card {
+            background: white;
+            border-radius: 18px;
+            padding: 30px;
+            margin-top: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .ending-title {
+            text-align: center;
+            font-size: 30px;
+            color: #704a2e;
+            margin-bottom: 20px;
+        }
+
+        .ending-text {
+            font-size: 18px;
+            line-height: 2;
+        }
+
+        .final-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 25px 0;
+        }
+
+        .final-item {
+            background: #f5f0e7;
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .final-item strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .player-type {
+            background: #332b22;
+            color: white;
+            padding: 20px;
+            border-radius: 14px;
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .player-type-title {
+            font-size: 14px;
+            opacity: 0.75;
+            letter-spacing: 2px;
+        }
+
+        .player-type-name {
+            font-size: 26px;
+            font-weight: bold;
+            margin: 8px 0;
+        }
+
         .hidden {
             display: none;
         }
@@ -276,6 +336,7 @@
         }
 
         @media (max-width: 600px) {
+
             .resources {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -291,6 +352,10 @@
             .tree-line {
                 display: none;
             }
+
+            .final-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -299,9 +364,6 @@
 <body>
 
 <div class="game">
-
-
-    <!-- 開始畫面 -->
 
     <div id="start-screen">
 
@@ -322,9 +384,7 @@
                 但蜀漢國力衰弱，朝廷內外仍有許多問題等待解決。
             </p>
 
-            <p>
-                <strong>現在，你是劉禪。</strong>
-            </p>
+            <p><strong>現在，你是劉禪。</strong></p>
 
             <p>
                 在這「危急存亡之秋」，<br>
@@ -333,15 +393,11 @@
 
         </div>
 
-        <button onclick="startGame()">
-            開始遊戲
-        </button>
+        <button onclick="startGame()">開始遊戲</button>
 
     </div>
 
 
-
-    <!-- 遊戲畫面 -->
 
     <div id="game-screen" class="hidden">
 
@@ -351,10 +407,7 @@
             你的每一個決定，都可能改變蜀漢的命運。
         </div>
 
-        <div class="status-title">
-            當前國勢
-        </div>
-
+        <div class="status-title">當前國勢</div>
 
         <div class="resources">
 
@@ -381,14 +434,11 @@
         </div>
 
 
-
         <!-- 第一回合 -->
 
         <div id="round1">
 
-            <div class="round">
-                第一回合・先帝留下的重臣
-            </div>
+            <div class="round">第一回合・先帝留下的重臣</div>
 
             <div class="event">
 
@@ -404,27 +454,22 @@
                     爾來二十有一年矣。」
                 </div>
 
-                <p>
-                    <strong>你要給諸葛亮多少權力？</strong>
-                </p>
+                <p><strong>你要給諸葛亮多少權力？</strong></p>
 
                 <div class="choices" id="choices1">
 
-                    <div class="choice" onclick="chooseRound1(1, this)">
-                        <strong>A｜完全信任諸葛亮</strong>
-                        <br><br>
-                        既然先帝如此信任他，朕也應當充分授權。
+                    <div class="choice" onclick="chooseRound1(1,this)">
+                        <strong>A｜完全信任諸葛亮</strong><br><br>
+                        既然先帝如此信任他，朕也應充分授權。
                     </div>
 
-                    <div class="choice" onclick="chooseRound1(2, this)">
-                        <strong>B｜信任，但保留監督</strong>
-                        <br><br>
-                        丞相能力出眾，但國家大事仍需要相互制衡。
+                    <div class="choice" onclick="chooseRound1(2,this)">
+                        <strong>B｜信任，但保留監督</strong><br><br>
+                        丞相能力出眾，但國家大事仍需要制衡。
                     </div>
 
-                    <div class="choice" onclick="chooseRound1(3, this)">
-                        <strong>C｜限制丞相權力</strong>
-                        <br><br>
+                    <div class="choice" onclick="chooseRound1(3,this)">
+                        <strong>C｜限制丞相權力</strong><br><br>
                         蜀漢不能讓任何一位臣子的權力過度集中。
                     </div>
 
@@ -437,23 +482,15 @@
         </div>
 
 
-
         <!-- 第二回合 -->
 
         <div id="round2" class="hidden">
 
-            <div class="round">
-                第二回合・朝廷中的人
-            </div>
+            <div class="round">第二回合・朝廷中的人</div>
 
             <div class="event">
 
                 <h2>「親賢臣，遠小人」</h2>
-
-                <p>
-                    諸葛亮認為蜀漢若要振興，
-                    首先必須任用賢能之士。
-                </p>
 
                 <div class="quote">
                     「親賢臣，遠小人，此先漢所以興隆也；
@@ -461,32 +498,25 @@
                 </div>
 
                 <p>
-                    有人主張完全依照諸葛亮的意見，
-                    也有人認為皇帝應保有最後決定權。
-                </p>
-
-                <p>
-                    <strong>你會怎麼做？</strong>
+                    諸葛亮認為蜀漢若要振興，
+                    首先必須任用賢能之士。
                 </p>
 
                 <div class="choices" id="choices2">
 
-                    <div class="choice" onclick="chooseRound2(1, this)">
-                        <strong>A｜完全採納諸葛亮的用人建議</strong>
-                        <br><br>
+                    <div class="choice" onclick="chooseRound2(1,this)">
+                        <strong>A｜完全採納諸葛亮的用人建議</strong><br><br>
                         丞相最了解國政，應放心任用他推薦的人才。
                     </div>
 
-                    <div class="choice" onclick="chooseRound2(2, this)">
-                        <strong>B｜參考諸葛亮，但由朕最後決定</strong>
-                        <br><br>
+                    <div class="choice" onclick="chooseRound2(2,this)">
+                        <strong>B｜參考諸葛亮，但由朕最後決定</strong><br><br>
                         賢臣固然重要，但皇帝也必須親自了解臣下。
                     </div>
 
-                    <div class="choice" onclick="chooseRound2(3, this)">
-                        <strong>C｜避免讓丞相主導所有人事</strong>
-                        <br><br>
-                        朝廷不能讓所有重要官員都出自同一個系統。
+                    <div class="choice" onclick="chooseRound2(3,this)">
+                        <strong>C｜避免讓丞相主導所有人事</strong><br><br>
+                        朝廷不能讓所有重要官員都出自同一系統。
                     </div>
 
                 </div>
@@ -498,22 +528,15 @@
         </div>
 
 
-
         <!-- 第三回合 -->
 
         <div id="round3" class="hidden">
 
-            <div class="round">
-                第三回合・丞相推薦的人才
-            </div>
+            <div class="round">第三回合・丞相推薦的人才</div>
 
             <div class="event">
 
                 <h2>「此皆良實，志慮忠純」</h2>
-
-                <p>
-                    諸葛亮向你推薦郭攸之、費禕、董允等人。
-                </p>
 
                 <div class="quote">
                     「侍中、侍郎郭攸之、費禕、董允等，
@@ -521,32 +544,24 @@
                 </div>
 
                 <p>
-                    這些人確實能力優秀。
-                    但朝廷中也有人擔心，
-                    丞相推薦的人逐漸掌握所有重要職位。
-                </p>
-
-                <p>
-                    <strong>你如何安排這批人才？</strong>
+                    這些人能力優秀，
+                    但朝廷中也有人擔心丞相推薦的人逐漸掌握重要職位。
                 </p>
 
                 <div class="choices" id="choices3">
 
-                    <div class="choice" onclick="chooseRound3(1, this)">
-                        <strong>A｜全部重用</strong>
-                        <br><br>
+                    <div class="choice" onclick="chooseRound3(1,this)">
+                        <strong>A｜全部重用</strong><br><br>
                         先帝留下、丞相認可的人才，沒有理由不用。
                     </div>
 
-                    <div class="choice" onclick="chooseRound3(2, this)">
-                        <strong>B｜重用人才，但保留不同聲音</strong>
-                        <br><br>
+                    <div class="choice" onclick="chooseRound3(2,this)">
+                        <strong>B｜重用人才，但保留不同聲音</strong><br><br>
                         任用他們，同時保留其他官員參與決策。
                     </div>
 
-                    <div class="choice" onclick="chooseRound3(3, this)">
-                        <strong>C｜提拔非丞相系統的官員</strong>
-                        <br><br>
+                    <div class="choice" onclick="chooseRound3(3,this)">
+                        <strong>C｜提拔非丞相系統官員</strong><br><br>
                         即使效率稍低，也要避免權力過度集中。
                     </div>
 
@@ -559,22 +574,15 @@
         </div>
 
 
-
         <!-- 第四回合 -->
 
         <div id="round4" class="hidden">
 
-            <div class="round">
-                第四回合・軍隊由誰掌握
-            </div>
+            <div class="round">第四回合・軍隊由誰掌握</div>
 
             <div class="event">
 
                 <h2>「將軍向寵，性行淑均，曉暢軍事」</h2>
-
-                <p>
-                    諸葛亮向你推薦將軍向寵整頓軍隊。
-                </p>
 
                 <div class="quote">
                     「將軍向寵，性行淑均，曉暢軍事，
@@ -582,33 +590,20 @@
                     是以眾議舉寵為督。」
                 </div>
 
-                <p>
-                    軍中大多認同向寵的能力。
-                    但若內政與軍隊都由丞相信任的人掌握，
-                    是否會造成權力集中？
-                </p>
-
-                <p>
-                    <strong>你要如何處理？</strong>
-                </p>
-
                 <div class="choices" id="choices4">
 
-                    <div class="choice" onclick="chooseRound4(1, this)">
-                        <strong>A｜完全授權向寵整頓軍隊</strong>
-                        <br><br>
-                        專業的事情，就應交給最有能力的人處理。
+                    <div class="choice" onclick="chooseRound4(1,this)">
+                        <strong>A｜完全授權向寵整頓軍隊</strong><br><br>
+                        專業的事情，就應交給最有能力的人。
                     </div>
 
-                    <div class="choice" onclick="chooseRound4(2, this)">
-                        <strong>B｜任用向寵，但皇帝保留監督</strong>
-                        <br><br>
-                        日常軍務交給向寵，但重大軍令仍須奏報。
+                    <div class="choice" onclick="chooseRound4(2,this)">
+                        <strong>B｜任用向寵，但皇帝保留監督</strong><br><br>
+                        日常軍務交給向寵，重大軍令仍須奏報。
                     </div>
 
-                    <div class="choice" onclick="chooseRound4(3, this)">
-                        <strong>C｜另提拔一名將領共同掌軍</strong>
-                        <br><br>
+                    <div class="choice" onclick="chooseRound4(3,this)">
+                        <strong>C｜另提拔一名將領共同掌軍</strong><br><br>
                         即使效率降低，也必須避免軍權過度集中。
                     </div>
 
@@ -621,22 +616,15 @@
         </div>
 
 
-
         <!-- 第五回合 -->
 
         <div id="round5" class="hidden">
 
-            <div class="round">
-                第五回合・北伐之議
-            </div>
+            <div class="round">第五回合・北伐之議</div>
 
             <div class="event">
 
                 <h2>「今南方已定，兵甲已足」</h2>
-
-                <p>
-                    南方已定，諸葛亮認為出兵北伐的時機已經成熟。
-                </p>
 
                 <div class="quote">
                     「今南方已定，兵甲已足，
@@ -646,32 +634,24 @@
                 </div>
 
                 <p>
-                    但蜀漢國力有限。
                     北伐可能帶來勝利，
                     也可能耗盡多年累積的資源。
                 </p>
 
-                <p>
-                    <strong>你要採取哪一種戰略？</strong>
-                </p>
-
                 <div class="choices" id="choices5">
 
-                    <div class="choice" onclick="chooseRound5(1, this)">
-                        <strong>A｜支持諸葛亮，全力北伐</strong>
-                        <br><br>
-                        興復漢室是先帝遺志，現在就應把握機會。
+                    <div class="choice" onclick="chooseRound5(1,this)">
+                        <strong>A｜支持諸葛亮，全力北伐</strong><br><br>
+                        興復漢室是先帝遺志，現在應把握機會。
                     </div>
 
-                    <div class="choice" onclick="chooseRound5(2, this)">
-                        <strong>B｜有限出兵，先試探魏軍</strong>
-                        <br><br>
+                    <div class="choice" onclick="chooseRound5(2,this)">
+                        <strong>B｜有限出兵，先試探魏軍</strong><br><br>
                         北伐可以進行，但先控制投入與風險。
                     </div>
 
-                    <div class="choice" onclick="chooseRound5(3, this)">
-                        <strong>C｜暫緩北伐，先休養生息</strong>
-                        <br><br>
+                    <div class="choice" onclick="chooseRound5(3,this)">
+                        <strong>C｜暫緩北伐，先休養生息</strong><br><br>
                         蜀漢根基尚弱，應先恢復國力。
                     </div>
 
@@ -684,27 +664,96 @@
         </div>
 
 
-
         <!-- 第六回合 -->
 
         <div id="round6" class="hidden">
 
-            <div class="round">
-                第六回合・北伐之後
-            </div>
+            <div class="round">第六回合・北伐之後</div>
 
             <div class="event">
 
                 <div id="round6Story"></div>
-
                 <div class="choices" id="choices6"></div>
-
                 <div id="result6" class="hidden"></div>
 
             </div>
 
         </div>
 
+
+        <!-- 第七回合 -->
+
+        <div id="round7" class="hidden">
+
+            <div class="round">第七回合・皇帝的聲音</div>
+
+            <div class="event">
+
+                <div id="round7Story"></div>
+
+                <div class="choices" id="choices7">
+
+                    <div class="choice" onclick="chooseRound7(1,this)">
+                        <strong>A｜仍由丞相主持議政，朕最後核准</strong><br><br>
+                        國事繁重，由丞相統整群臣意見，再交皇帝核准。
+                    </div>
+
+                    <div class="choice" onclick="chooseRound7(2,this)">
+                        <strong>B｜召集群臣公開議政，由朕最後裁決</strong><br><br>
+                        讓各方陳述意見，再由皇帝親自判斷。
+                    </div>
+
+                    <div class="choice" onclick="chooseRound7(3,this)">
+                        <strong>C｜要求各部直接向朕奏報</strong><br><br>
+                        皇帝若要掌握國政，就不能所有事情都先經丞相府。
+                    </div>
+
+                </div>
+
+                <div id="result7" class="hidden"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- 第八回合 -->
+
+        <div id="round8" class="hidden">
+
+            <div class="round">第八回合・危急存亡之秋</div>
+
+            <div class="event">
+
+                <div id="round8Story"></div>
+
+                <div class="choices" id="choices8">
+
+                    <div class="choice" onclick="chooseRound8(1,this)">
+                        <strong>A｜全權交由諸葛亮統籌軍政</strong><br><br>
+                        危急之際必須統一指揮，讓最有經驗的人處理。
+                    </div>
+
+                    <div class="choice" onclick="chooseRound8(2,this)">
+                        <strong>B｜君臣共同決策，各司其職</strong><br><br>
+                        丞相負責軍事，皇帝穩定朝廷，重大事項共同商議。
+                    </div>
+
+                    <div class="choice" onclick="chooseRound8(3,this)">
+                        <strong>C｜由皇帝親自掌握最高指揮權</strong><br><br>
+                        危急時刻，更不能讓皇帝失去國家主導權。
+                    </div>
+
+                </div>
+
+                <div id="result8" class="hidden"></div>
+
+            </div>
+
+        </div>
+
+
+        <div id="ending-screen" class="hidden"></div>
 
     </div>
 
@@ -714,1784 +763,2064 @@
 
 <script>
 
+// =====================================================
+// 初始數值
+// =====================================================
 
-    // =====================================================
-    // 國家數值
-    // =====================================================
+let power = 35;
+let army = 35;
+let food = 45;
+let people = 55;
 
-    let power = 35;
-    let army = 35;
-    let food = 45;
-    let people = 55;
+let zhugeInfluence = 50;
+let emperorAuthority = 50;
+let trust = 50;
+let legacy = 50;
 
+let northernExpeditionChoice = "";
+let emperorStyle = "";
+let finalCommand = "";
 
-    // =====================================================
-    // 隱藏政治數值
-    // =====================================================
-
-    let zhugeInfluence = 50;
-    let emperorAuthority = 50;
-    let trust = 50;
-    let legacy = 50;
-
-
-    // =====================================================
-    // 重大決策紀錄
-    // =====================================================
-
-    let northernExpeditionChoice = "";
-
-
-    // =====================================================
-    // 防止重複作答
-    // =====================================================
-
-    let round1Chosen = false;
-    let round2Chosen = false;
-    let round3Chosen = false;
-    let round4Chosen = false;
-    let round5Chosen = false;
-    let round6Chosen = false;
+let round1Chosen = false;
+let round2Chosen = false;
+let round3Chosen = false;
+let round4Chosen = false;
+let round5Chosen = false;
+let round6Chosen = false;
+let round7Chosen = false;
+let round8Chosen = false;
 
 
+// =====================================================
+// 共用
+// =====================================================
 
-    // =====================================================
-    // 開始遊戲
-    // =====================================================
+function startGame() {
 
-    function startGame() {
+    document.getElementById("start-screen").classList.add("hidden");
+    document.getElementById("game-screen").classList.remove("hidden");
 
-        document.getElementById("start-screen").classList.add("hidden");
+    updateDisplay();
+}
 
-        document.getElementById("game-screen").classList.remove("hidden");
 
-        updateDisplay();
+function lockChoices(containerId, selectedElement) {
 
+    const container = document.getElementById(containerId);
+
+    container.classList.add("locked");
+
+    if (selectedElement) {
+        selectedElement.classList.add("selected");
     }
+}
 
 
+function showRound(currentRound, nextRound) {
 
-    function lockChoices(containerId, selectedElement) {
+    document.getElementById(currentRound).classList.add("hidden");
+    document.getElementById(nextRound).classList.remove("hidden");
 
-        const container = document.getElementById(containerId);
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
 
-        container.classList.add("locked");
 
-        if (selectedElement) {
-            selectedElement.classList.add("selected");
-        }
+function finishChoice(result) {
 
-    }
+    keepValuesInRange();
+    updateDisplay();
 
+    result.classList.remove("hidden");
+}
 
 
-    function showRound(currentRound, nextRound) {
+function clamp(value) {
+    return Math.max(0, Math.min(100, value));
+}
 
-        document.getElementById(currentRound).classList.add("hidden");
 
-        document.getElementById(nextRound).classList.remove("hidden");
+function keepValuesInRange() {
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+    power = clamp(power);
+    army = clamp(army);
+    food = clamp(food);
+    people = clamp(people);
 
-    }
+    zhugeInfluence = clamp(zhugeInfluence);
+    emperorAuthority = clamp(emperorAuthority);
+    trust = clamp(trust);
+    legacy = clamp(legacy);
+}
 
 
 
-    // =====================================================
-    // 第一回合
-    // =====================================================
+// =====================================================
+// 第一回合
+// =====================================================
 
-    function chooseRound1(choice, element) {
+function chooseRound1(choice, element) {
 
-        if (round1Chosen) return;
+    if (round1Chosen) return;
 
-        round1Chosen = true;
+    round1Chosen = true;
+    lockChoices("choices1", element);
 
-        lockChoices("choices1", element);
+    const result = document.getElementById("result");
 
-        const result = document.getElementById("result");
+    if (choice === 1) {
 
+        power += 4;
 
-        if (choice === 1) {
+        zhugeInfluence += 8;
+        emperorAuthority -= 4;
+        trust += 6;
+        legacy += 3;
 
-            power += 4;
+        result.innerHTML = `
+            <h3>你選擇了：完全信任諸葛亮</h3>
 
-            zhugeInfluence += 8;
-            emperorAuthority -= 4;
-            trust += 6;
-            legacy += 3;
-
-            result.innerHTML = `
-
-                <h3>你選擇了：完全信任諸葛亮</h3>
-
-                <p>
-                    諸葛亮獲得更大的施政空間，
-                    朝廷政令更加迅速。
-                </p>
-
-                ${impactTree(
-                    "完全信任諸葛亮",
-                    [
-                        ["🏯 國力", "↑", "up"],
-                        ["🤝 君臣合作", "↑", "up"],
-                        ["🧠 權力結構", "？", "mystery"]
-                    ]
-                )}
-
-                <p>
-                    諸葛亮在朝廷中的影響力也逐漸增加。
-                </p>
-
-                <button onclick="nextRound1()">下一回合 →</button>
-            `;
-
-        }
-
-
-        else if (choice === 2) {
-
-            power += 2;
-
-            zhugeInfluence += 3;
-            emperorAuthority += 2;
-            trust += 3;
-            legacy += 2;
-
-            result.innerHTML = `
-
-                <h3>你選擇了：信任，但保留監督</h3>
-
-                ${impactTree(
-                    "信任，但保留監督",
-                    [
-                        ["🏯 國力", "↑", "up"],
-                        ["🤝 君臣合作", "↑", "up"],
-                        ["⚖️ 權力平衡", "↑", "up"]
-                    ]
-                )}
-
-                <p>
-                    君臣之間維持合作，
-                    皇帝也仍保留一定主導權。
-                </p>
-
-                <button onclick="nextRound1()">下一回合 →</button>
-            `;
-
-        }
-
-
-        else {
-
-            power -= 2;
-
-            zhugeInfluence -= 6;
-            emperorAuthority += 8;
-            trust -= 7;
-
-            result.innerHTML = `
-
-                <h3>你選擇了：限制丞相權力</h3>
-
-                ${impactTree(
-                    "限制丞相權力",
-                    [
-                        ["🏯 國力", "↓", "down"],
-                        ["👑 皇權", "↑", "up"],
-                        ["🤝 君臣信任", "↓", "down"]
-                    ]
-                )}
-
-                <p>
-                    皇權更加穩固，
-                    但諸葛亮開始懷疑你是否真正信任他。
-                </p>
-
-                <button onclick="nextRound1()">下一回合 →</button>
-            `;
-
-        }
-
-        finishChoice(result);
-
-    }
-
-
-
-    function nextRound1() {
-
-        showRound("round1", "round2");
-
-    }
-
-
-
-    // =====================================================
-    // 第二回合
-    // =====================================================
-
-    function chooseRound2(choice, element) {
-
-        if (round2Chosen) return;
-
-        round2Chosen = true;
-
-        lockChoices("choices2", element);
-
-        const result = document.getElementById("result2");
-
-
-        if (choice === 1) {
-
-            power += 4;
-            people += 1;
-
-            zhugeInfluence += 7;
-            emperorAuthority -= 3;
-            trust += 4;
-            legacy += 3;
-
-            result.innerHTML = `
-
-                <h3>你選擇了：完全採納諸葛亮的建議</h3>
-
-                ${impactTree(
-                    "完全採納丞相建議",
-                    [
-                        ["🏯 國力", "↑", "up"],
-                        ["❤️ 民心", "↑", "up"],
-                        ["🧠 丞相影響力", "？", "mystery"]
-                    ]
-                )}
-
-                <p>
-                    賢能官員進入朝廷，
-                    政務開始更加順暢。
-                </p>
-
-                <button onclick="nextRound2()">下一回合 →</button>
-            `;
-
-        }
-
-
-        else if (choice === 2) {
-
-            power += 3;
-            people += 1;
-
-            zhugeInfluence += 2;
-            emperorAuthority += 4;
-            trust += 2;
-            legacy += 2;
-
-            result.innerHTML = `
-
-                <h3>你選擇了：由朕最後決定</h3>
-
-                ${impactTree(
-                    "皇帝最後決定",
-                    [
-                        ["🏯 國力", "↑", "up"],
-                        ["❤️ 民心", "↑", "up"],
-                        ["👑 皇權", "↑", "up"]
-                    ]
-                )}
-
-                <p>
-                    賢臣得到任用，
-                    最後的決定權仍掌握在皇帝手中。
-                </p>
-
-                <button onclick="nextRound2()">下一回合 →</button>
-            `;
-
-        }
-
-
-        else {
-
-            power -= 2;
-            people -= 1;
-
-            zhugeInfluence -= 5;
-            emperorAuthority += 7;
-            trust -= 5;
-
-            result.innerHTML = `
-
-                <h3>你選擇了：限制丞相的人事權</h3>
-
-                ${impactTree(
-                    "分散人事權",
-                    [
-                        ["🏯 國力", "↓", "down"],
-                        ["❤️ 民心", "↓", "down"],
-                        ["👑 皇權", "↑", "up"]
-                    ]
-                )}
-
-                <p>
-                    朝廷權力更加分散，
-                    但部分政務效率受到影響。
-                </p>
-
-                <button onclick="nextRound2()">下一回合 →</button>
-            `;
-
-        }
-
-        finishChoice(result);
-
-    }
-
-
-
-    function nextRound2() {
-
-        showRound("round2", "round3");
-
-    }
-
-
-
-    // =====================================================
-    // 第三回合
-    // =====================================================
-
-    function chooseRound3(choice, element) {
-
-        if (round3Chosen) return;
-
-        round3Chosen = true;
-
-        lockChoices("choices3", element);
-
-        const result = document.getElementById("result3");
-
-
-        if (choice === 1) {
-
-            power += 5;
-            people += 1;
-
-            zhugeInfluence += 7;
-            emperorAuthority -= 4;
-            trust += 3;
-            legacy += 3;
-
-            result.innerHTML = `
-
-                <h3>你選擇了：全部重用</h3>
-
-                ${impactTree(
-                    "全部重用",
-                    [
-                        ["🏯 國力", "↑", "up"],
-                        ["❤️ 民心", "↑", "up"],
-                        ["🧠 權力結構", "？", "mystery"]
-                    ]
-                )}
-
-                <p>
-                    優秀人才改善了政務，
-                    但丞相的政治影響力也進一步擴大。
-                </p>
-
-                <button onclick="nextRound3()">下一回合 →</button>
-            `;
-
-        }
-
-
-        else if (choice === 2) {
-
-            power += 3;
-            people += 1;
-
-            zhugeInfluence += 3;
-            emperorAuthority += 3;
-            trust += 3;
-            legacy += 2;
-
-            result.innerHTML = `
-
-                <h3>你選擇了：重用人才，但保留不同聲音</h3>
-
-                ${impactTree(
-                    "人才與制衡並行",
-                    [
-                        ["🏯 國力", "↑", "up"],
-                        ["❤️ 民心", "↑", "up"],
-                        ["⚖️ 權力平衡", "↑", "up"]
-                    ]
-                )}
-
-                <p>
-                    朝廷效率提升，
-                    同時仍保有一定程度的制衡。
-                </p>
-
-                <button onclick="nextRound3()">下一回合 →</button>
-            `;
-
-        }
-
-
-        else {
-
-            power -= 2;
-            people -= 1;
-
-            zhugeInfluence -= 5;
-            emperorAuthority += 7;
-            trust -= 4;
-
-            result.innerHTML = `
-
-                <h3>你選擇了：提拔其他官員</h3>
-
-                ${impactTree(
-                    "提拔其他派系",
-                    [
-                        ["🏯 國力", "↓", "down"],
-                        ["❤️ 民心", "↓", "down"],
-                        ["👑 皇權", "↑", "up"]
-                    ]
-                )}
-
-                <p>
-                    皇帝掌握更多人事主導權，
-                    但行政效率有所下降。
-                </p>
-
-                <button onclick="nextRound3()">下一回合 →</button>
-            `;
-
-        }
-
-        finishChoice(result);
-
-    }
-
-
-
-    function nextRound3() {
-
-        showRound("round3", "round4");
-
-    }
-
-
-
-    // =====================================================
-    // 第四回合
-    // =====================================================
-
-    function chooseRound4(choice, element) {
-
-        if (round4Chosen) return;
-
-        round4Chosen = true;
-
-        lockChoices("choices4", element);
-
-        const result = document.getElementById("result4");
-
-
-        if (choice === 1) {
-
-            army += 8;
-            power += 2;
-
-            zhugeInfluence += 7;
-            emperorAuthority -= 5;
-            trust += 4;
-            legacy += 3;
-
-            result.innerHTML = `
-
-                <h3>你選擇了：完全授權向寵</h3>
-
-                ${impactTree(
-                    "完全授權向寵",
-                    [
-                        ["⚔️ 軍力", "↑", "up"],
-                        ["🏯 國力", "↑", "up"],
-                        ["🧠 軍政結構", "？", "mystery"]
-                    ]
-                )}
-
-                <p>
-                    軍令統一，部隊戰鬥能力明顯提升。
-                </p>
-
-                <button onclick="nextRound4()">下一回合 →</button>
-            `;
-
-        }
-
-
-        else if (choice === 2) {
-
-            army += 5;
-            power += 2;
-
-            zhugeInfluence += 3;
-            emperorAuthority += 3;
-            trust += 2;
-            legacy += 2;
-
-            result.innerHTML = `
-
-                <h3>你選擇了：任用向寵，但保留監督</h3>
-
-                ${impactTree(
-                    "任用向寵，保留監督",
-                    [
-                        ["⚔️ 軍力", "↑", "up"],
-                        ["🏯 國力", "↑", "up"],
-                        ["👑 皇權", "↑", "up"]
-                    ]
-                )}
-
-                <p>
-                    軍隊有所改善，
-                    皇帝仍掌握重大軍令。
-                </p>
-
-                <button onclick="nextRound4()">下一回合 →</button>
-            `;
-
-        }
-
-
-        else {
-
-            army -= 2;
-            power -= 1;
-
-            zhugeInfluence -= 5;
-            emperorAuthority += 7;
-            trust -= 5;
-
-            result.innerHTML = `
-
-                <h3>你選擇了：分散軍權</h3>
-
-                ${impactTree(
-                    "分散軍權",
-                    [
-                        ["⚔️ 軍力", "↓", "down"],
-                        ["🏯 國力", "↓", "down"],
-                        ["👑 皇權", "↑", "up"]
-                    ]
-                )}
-
-                <p>
-                    軍權更加分散，
-                    但命令協調開始出現問題。
-                </p>
-
-                <button onclick="nextRound4()">下一回合 →</button>
-            `;
-
-        }
-
-        finishChoice(result);
-
-    }
-
-
-
-    function nextRound4() {
-
-        showRound("round4", "round5");
-
-    }
-
-
-
-    // =====================================================
-    // 第五回合
-    // =====================================================
-
-    function chooseRound5(choice, element) {
-
-        if (round5Chosen) return;
-
-        round5Chosen = true;
-
-        lockChoices("choices5", element);
-
-        const result = document.getElementById("result5");
-
-
-
-        // 全力北伐
-
-        if (choice === 1) {
-
-            northernExpeditionChoice = "full";
-
-            legacy += 10;
-            zhugeInfluence += 6;
-            trust += 4;
-
-            food -= 12;
-
-
-            if (army >= 40 && food >= 30) {
-
-                army += 5;
-                power += 5;
-                people += 3;
-
-                result.innerHTML = `
-
-                    <h3>你選擇了：全力北伐</h3>
-
-                    <div class="success-box">
-                        <strong>前線傳來捷報。</strong><br>
-                        蜀軍準備較為充分，
-                        北伐初期取得數場局部勝利。
-                    </div>
-
-                    ${impactTree(
-                        "全力北伐",
-                        [
-                            ["⚔️ 軍勢", "↑", "up"],
-                            ["❤️ 民心", "↑", "up"],
-                            ["🌾 糧草", "↓", "down"]
-                        ]
-                    )}
-
-                    <p>
-                        勝利使朝廷與百姓士氣大振。
-                    </p>
-
-                    <p>
-                        然而，大量軍糧也正源源不斷送往前線。
-                    </p>
-
-                    <button onclick="nextRound5()">查看後續 →</button>
-                `;
-
-            }
-
-
-            else {
-
-                army -= 5;
-                power -= 5;
-                people -= 5;
-
-                result.innerHTML = `
-
-                    <h3>你選擇了：全力北伐</h3>
-
-                    <div class="danger-box">
-                        <strong>北伐進展不順。</strong><br>
-                        軍隊與後勤準備不足，
-                        前線很快陷入困境。
-                    </div>
-
-                    ${impactTree(
-                        "全力北伐",
-                        [
-                            ["⚔️ 軍勢", "↓", "down"],
-                            ["❤️ 民心", "↓", "down"],
-                            ["🌾 糧草", "↓", "down"]
-                        ]
-                    )}
-
-                    <p>
-                        前線失利的消息傳回國內，
-                        朝廷與百姓開始質疑這場戰爭。
-                    </p>
-
-                    <button onclick="nextRound5()">查看後續 →</button>
-                `;
-
-            }
-
-        }
-
-
-
-        // 有限北伐
-
-        else if (choice === 2) {
-
-            northernExpeditionChoice = "limited";
-
-            legacy += 5;
-            food -= 6;
-            trust += 1;
-
-
-            if (army >= 40) {
-
-                army += 2;
-                power += 2;
-                people += 1;
-
-                result.innerHTML = `
-
-                    <h3>你選擇了：有限出兵</h3>
-
-                    <div class="success-box">
-                        蜀軍以有限兵力試探魏國，
-                        取得了一些小規模成果。
-                    </div>
-
-                    ${impactTree(
-                        "有限北伐",
-                        [
-                            ["⚔️ 軍勢", "↑", "up"],
-                            ["❤️ 民心", "↑", "up"],
-                            ["🌾 糧草", "↓", "down"]
-                        ]
-                    )}
-
-                    <p>
-                        主戰派開始認為：
-                        或許可以趁勢擴大戰果。
-                    </p>
-
-                    <button onclick="nextRound5()">查看後續 →</button>
-                `;
-
-            }
-
-
-            else {
-
-                army -= 1;
-                power -= 1;
-
-                result.innerHTML = `
-
-                    <h3>你選擇了：有限出兵</h3>
-
-                    <div class="warning-box">
-                        蜀軍避免了重大損失，
-                        但也沒有取得足以改變局勢的戰果。
-                    </div>
-
-                    ${impactTree(
-                        "有限北伐",
-                        [
-                            ["⚔️ 軍勢", "↓", "down"],
-                            ["❤️ 民心", "→", "neutral"],
-                            ["🌾 糧草", "↓", "down"]
-                        ]
-                    )}
-
-                    <button onclick="nextRound5()">查看後續 →</button>
-                `;
-
-            }
-
-        }
-
-
-
-        // 休養生息
-
-        else {
-
-            northernExpeditionChoice = "delay";
-
-            food += 8;
-            power += 4;
-            people += 5;
-
-            emperorAuthority += 4;
-            zhugeInfluence -= 3;
-            trust -= 3;
-            legacy -= 8;
-
-            result.innerHTML = `
-
-                <h3>你選擇了：暫緩北伐</h3>
-
-                <div class="success-box">
-                    大軍沒有出征，
-                    蜀漢得以把更多糧食與人力留在國內。
-                </div>
-
-                ${impactTree(
-                    "休養生息",
-                    [
-                        ["🏯 國力", "↑", "up"],
-                        ["🌾 糧草", "↑", "up"],
-                        ["❤️ 民心", "↑", "up"]
-                    ]
-                )}
-
-                <p>
-                    百姓負擔逐漸減輕。
-                </p>
-
-                <p>
-                    但朝廷中的主戰派開始質問：
-                </p>
-
-                <p>
-                    <strong>
-                        「若始終等待，何時才能興復漢室？」
-                    </strong>
-                </p>
-
-                <button onclick="nextRound5()">查看後續 →</button>
-            `;
-
-        }
-
-        finishChoice(result);
-
-    }
-
-
-
-    function nextRound5() {
-
-        buildRound6();
-
-        showRound("round5", "round6");
-
-    }
-
-
-
-    // =====================================================
-    // 建立第六回合
-    // =====================================================
-
-    function buildRound6() {
-
-        const story = document.getElementById("round6Story");
-
-        const choices = document.getElementById("choices6");
-
-
-
-        // 全力北伐
-
-        if (northernExpeditionChoice === "full") {
-
-            story.innerHTML = `
-
-                <h2>前線急報：糧草將盡</h2>
-
-                <div class="report">
-                    <strong>漢中急報：</strong><br>
-                    前線大軍每日消耗大量糧草，
-                    運糧道路漫長，民夫疲憊。
-                    若再持續進攻，後方恐怕難以支撐。
-                </div>
-
-                <p>
-                    諸葛亮仍主張把握戰機。
-                </p>
-
-                <p>
-                    他上奏：
-                    「魏軍已有動搖之勢，若此時退兵，
-                    前功恐盡棄。」
-                </p>
-
-                <p>
-                    但朝中官員擔心，
-                    再次徵糧將使百姓負擔更加沉重。
-                </p>
-
-                <p>
-                    <strong>
-                        你已經選擇了戰爭。<br>
-                        現在，你願意付出多少代價？
-                    </strong>
-                </p>
-            `;
-
-
-            choices.innerHTML = `
-
-                <div class="choice" onclick="chooseRound6(1, this)">
-                    <strong>A｜追加糧草，支持諸葛亮繼續進攻</strong>
-                    <br><br>
-                    既然已經出兵，就不能在最關鍵的時候退縮。
-                </div>
-
-                <div class="choice" onclick="chooseRound6(2, this)">
-                    <strong>B｜停止擴張戰線，轉為守勢</strong>
-                    <br><br>
-                    保留目前戰果，同時降低糧草消耗。
-                </div>
-
-                <div class="choice" onclick="chooseRound6(3, this)">
-                    <strong>C｜立即下詔班師</strong>
-                    <br><br>
-                    國家不能為了一場戰爭耗盡根本。
-                </div>
-            `;
-
-        }
-
-
-
-        // 有限北伐
-
-        else if (northernExpeditionChoice === "limited") {
-
-            story.innerHTML = `
-
-                <h2>前線來報：魏軍出現破綻</h2>
-
-                <div class="report">
-                    蜀軍在前線取得一些戰果。
-                    魏軍部分守將退卻，
-                    有將領認為這是一個難得的機會。
-                </div>
-
-                <p>
-                    軍中有人主張：
-                    「若此時增加兵力，或許能攻下更多城池。」
-                </p>
-
-                <p>
-                    但也有人提醒：
-                    這原本只是一次有限度的軍事行動。
-                </p>
-
-                <p>
-                    <strong>
-                        面對意料之外的機會，
-                        你是否要改變原本的戰略？
-                    </strong>
-                </p>
-            `;
-
-
-            choices.innerHTML = `
-
-                <div class="choice" onclick="chooseRound6(1, this)">
-                    <strong>A｜趁勢增兵，擴大北伐</strong>
-                    <br><br>
-                    戰機稍縱即逝，既然魏軍動搖，就應乘勝追擊。
-                </div>
-
-                <div class="choice" onclick="chooseRound6(2, this)">
-                    <strong>B｜維持原本的有限戰略</strong>
-                    <br><br>
-                    不能因一時勝利便改變整體國策。
-                </div>
-
-                <div class="choice" onclick="chooseRound6(3, this)">
-                    <strong>C｜見好就收，撤軍回國</strong>
-                    <br><br>
-                    已經取得成果，現在正是保存實力的時候。
-                </div>
-            `;
-
-        }
-
-
-
-        // 休養生息
-
-        else {
-
-            story.innerHTML = `
-
-                <h2>朝廷爭議：何時才能北伐？</h2>
-
-                <div class="report">
-                    暫緩北伐之後，
-                    蜀漢的糧倉逐漸充實，
-                    百姓負擔也有所減輕。
-                </div>
-
-                <p>
-                    但數月後，
-                    朝廷中的主戰派再次上奏。
-                </p>
-
-                <p>
-                    「魏國人口與國力皆勝於我。
-                    若只是休養，
-                    魏國恢復得只會比蜀漢更快。」
-                </p>
-
-                <p>
-                    諸葛亮也再次請求整軍待發。
-                </p>
-
-                <div class="quote">
-                    「北定中原，攘除姦凶，
-                    興復漢室，還於舊都。」
-                </div>
-
-                <p>
-                    <strong>
-                        休養生息確實改善了國內情勢。<br>
-                        但等待，本身也可能是一種風險。
-                    </strong>
-                </p>
-            `;
-
-
-            choices.innerHTML = `
-
-                <div class="choice" onclick="chooseRound6(1, this)">
-                    <strong>A｜改變決定，批准出兵</strong>
-                    <br><br>
-                    國內已稍有恢復，不能永遠等待。
-                </div>
-
-                <div class="choice" onclick="chooseRound6(2, this)">
-                    <strong>B｜整軍備糧，但暫不出兵</strong>
-                    <br><br>
-                    為北伐做好準備，但由皇帝決定真正出兵時機。
-                </div>
-
-                <div class="choice" onclick="chooseRound6(3, this)">
-                    <strong>C｜堅持休養生息</strong>
-                    <br><br>
-                    蜀漢首要任務是生存，而不是完成一場未必能成功的戰爭。
-                </div>
-            `;
-
-        }
-
-    }
-
-
-
-    // =====================================================
-    // 第六回合
-    // =====================================================
-
-    function chooseRound6(choice, element) {
-
-        if (round6Chosen) return;
-
-        round6Chosen = true;
-
-        lockChoices("choices6", element);
-
-        const result = document.getElementById("result6");
-
-
-
-        // =================================================
-        // 全力北伐
-        // =================================================
-
-        if (northernExpeditionChoice === "full") {
-
-
-            // 追加糧草
-
-            if (choice === 1) {
-
-                food -= 15;
-                people -= 10;
-
-                army += 3;
-
-                zhugeInfluence += 7;
-                emperorAuthority -= 4;
-                trust += 5;
-                legacy += 7;
-
-
-                if (food >= 20 && army >= 40) {
-
-                    power += 4;
-
-                    result.innerHTML = `
-
-                        <h3>你決定追加糧草，繼續北伐</h3>
-
-                        <div class="success-box">
-                            蜀軍得到新的補給，
-                            前線再次發動攻勢。
-                        </div>
-
-                        ${impactTree(
-                            "追加糧草",
-                            [
-                                ["⚔️ 軍勢", "↑", "up"],
-                                ["🌾 糧草", "↓", "down"],
-                                ["❤️ 民心", "↓", "down"]
-                            ]
-                        )}
-
-                        <p>
-                            朝廷再次向各郡徵收糧食，
-                            大批民夫被徵調運糧。
-                        </p>
-
-                        <p>
-                            地方官上奏：
-                            <br>
-                            <strong>
-                                「民間負擔日重，怨聲漸起。」
-                            </strong>
-                        </p>
-                    `;
-
-                }
-
-
-                else {
-
-                    power -= 5;
-                    army -= 4;
-
-                    result.innerHTML = `
-
-                        <h3>你決定追加糧草，繼續北伐</h3>
-
-                        <div class="danger-box">
-                            即使再次徵糧，
-                            國內也已難以支撐前線需求。
-                        </div>
-
-                        ${impactTree(
-                            "勉強維持北伐",
-                            [
-                                ["⚔️ 軍勢", "↓", "down"],
-                                ["🌾 糧草", "↓", "down"],
-                                ["❤️ 民心", "↓", "down"]
-                            ]
-                        )}
-
-                        <p>
-                            前線補給仍然斷續，
-                            百姓卻已承受新的徵糧與徭役。
-                        </p>
-                    `;
-
-                }
-
-            }
-
-
-
-            // 轉守
-
-            else if (choice === 2) {
-
-                food -= 3;
-                people -= 2;
-
-                army += 1;
-                power += 1;
-
-                emperorAuthority += 3;
-                trust += 1;
-                legacy += 2;
-
-                result.innerHTML = `
-
-                    <h3>你命令諸葛亮停止擴張戰線</h3>
-
-                    ${impactTree(
-                        "轉攻為守",
-                        [
-                            ["⚔️ 軍勢", "↑", "up"],
-                            ["🌾 糧草", "↓", "down"],
-                            ["❤️ 民心", "↓", "down"]
-                        ]
-                    )}
-
-                    <p>
-                        蜀軍保留前線據點，
-                        不再冒險深入魏境。
-                    </p>
-
-                    <p>
-                        戰爭尚未停止，
-                        但後方負擔有所減輕。
-                    </p>
-                `;
-
-            }
-
-
-
-            // 班師
-
-            else {
-
-                food += 4;
-                people += 4;
-
-                army -= 2;
-
-                emperorAuthority += 7;
-                zhugeInfluence -= 6;
-                trust -= 7;
-                legacy -= 5;
-
-                result.innerHTML = `
-
-                    <h3>你下令班師</h3>
-
-                    ${impactTree(
-                        "停止北伐",
-                        [
-                            ["🌾 糧草", "↑", "up"],
-                            ["❤️ 民心", "↑", "up"],
-                            ["🤝 君臣關係", "↓", "down"]
-                        ]
-                    )}
-
-                    <p>
-                        大軍撤回蜀中，
-                        百姓的徵調壓力迅速降低。
-                    </p>
-
-                    <p>
-                        但諸葛亮沉默許久。
-                    </p>
-                `;
-
-            }
-
-        }
-
-
-
-        // =================================================
-        // 有限北伐
-        // =================================================
-
-        else if (northernExpeditionChoice === "limited") {
-
-
-            // 擴大戰爭
-
-            if (choice === 1) {
-
-                food -= 9;
-
-                zhugeInfluence += 5;
-                trust += 4;
-                legacy += 6;
-
-
-                if (army >= 40 && food >= 25) {
-
-                    army += 3;
-                    power += 4;
-
-                    result.innerHTML = `
-
-                        <h3>你決定乘勝追擊</h3>
-
-                        <div class="success-box">
-                            蜀軍擴大攻勢，
-                            成功把局部戰果進一步放大。
-                        </div>
-
-                        ${impactTree(
-                            "擴大北伐",
-                            [
-                                ["⚔️ 軍勢", "↑", "up"],
-                                ["🏯 國力", "↑", "up"],
-                                ["🌾 糧草", "↓", "down"]
-                            ]
-                        )}
-
-                        <p>
-                            原本謹慎的北伐，
-                            正逐漸演變成真正的大戰。
-                        </p>
-                    `;
-
-                }
-
-
-                else {
-
-                    army -= 3;
-                    power -= 3;
-                    people -= 5;
-
-                    result.innerHTML = `
-
-                        <h3>你決定乘勝追擊</h3>
-
-                        <div class="warning-box">
-                            原本的小勝不足以支撐大規模進攻。
-                            戰線拉長後，補給與兵力問題迅速浮現。
-                        </div>
-
-                        ${impactTree(
-                            "擴大北伐失利",
-                            [
-                                ["⚔️ 軍勢", "↓", "down"],
-                                ["🏯 國力", "↓", "down"],
-                                ["❤️ 民心", "↓", "down"]
-                            ]
-                        )}
-
-                        <p>
-                            戰事失利的消息傳回蜀中，
-                            百姓開始質疑朝廷為何擴大戰爭。
-                        </p>
-                    `;
-
-                }
-
-            }
-
-
-
-            // 維持有限北伐
-
-            else if (choice === 2) {
-
-                food -= 3;
-                people -= 1;
-
-                army += 2;
-                power += 2;
-
-                emperorAuthority += 2;
-                trust += 2;
-                legacy += 3;
-
-                result.innerHTML = `
-
-                    <h3>你維持原本的有限戰略</h3>
-
-                    ${impactTree(
-                        "保持有限北伐",
-                        [
-                            ["⚔️ 軍力", "↑", "up"],
-                            ["🏯 國力", "↑", "up"],
-                            ["❤️ 民心", "↓", "down"]
-                        ]
-                    )}
-
-                    <p>
-                        蜀軍沒有追求決定性的勝負，
-                        而是繼續累積戰場經驗。
-                    </p>
-
-                    <p>
-                        戰爭仍然需要付出成本，
-                        但目前尚在蜀漢可承受的範圍內。
-                    </p>
-                `;
-
-            }
-
-
-
-            // 撤軍
-
-            else {
-
-                food += 4;
-                people += 3;
-
-                emperorAuthority += 5;
-                zhugeInfluence -= 3;
-                trust -= 2;
-                legacy -= 2;
-
-                result.innerHTML = `
-
-                    <h3>你決定見好就收</h3>
-
-                    ${impactTree(
-                        "撤軍保存實力",
-                        [
-                            ["🌾 糧草", "↑", "up"],
-                            ["❤️ 民心", "↑", "up"],
-                            ["📜 北伐目標", "？", "mystery"]
-                        ]
-                    )}
-
-                    <p>
-                        蜀軍帶著已有戰果撤回國內。
-                    </p>
-
-                    <p>
-                        這場行動沒有成為大勝，
-                        卻也沒有演變成耗盡國力的大敗。
-                    </p>
-                `;
-
-            }
-
-        }
-
-
-
-        // =================================================
-        // 休養生息
-        // =================================================
-
-        else {
-
-
-            // 開始北伐
-
-            if (choice === 1) {
-
-                food -= 8;
-                people -= 3;
-
-                army += 3;
-
-                zhugeInfluence += 5;
-                trust += 5;
-                legacy += 7;
-
-                result.innerHTML = `
-
-                    <h3>你改變決定，批准北伐</h3>
-
-                    ${impactTree(
-                        "休養後出兵",
-                        [
-                            ["⚔️ 軍勢", "↑", "up"],
-                            ["🌾 糧草", "↓", "down"],
-                            ["❤️ 民心", "↓", "down"]
-                        ]
-                    )}
-
-                    <p>
-                        先前的休養讓蜀漢擁有較充分的準備時間。
-                    </p>
-
-                    <p>
-                        但大軍出征之後，
-                        百姓也再次承擔軍糧與徭役。
-                    </p>
-                `;
-
-            }
-
-
-
-            // 備戰不打
-
-            else if (choice === 2) {
-
-                food += 2;
-                people -= 1;
-
-                army += 5;
-                power += 2;
-
-                emperorAuthority += 4;
-                trust += 1;
-                legacy += 2;
-
-                result.innerHTML = `
-
-                    <h3>你決定整軍備戰，但暫不出兵</h3>
-
-                    ${impactTree(
-                        "備戰而不戰",
-                        [
-                            ["⚔️ 軍力", "↑", "up"],
-                            ["🏯 國力", "↑", "up"],
-                            ["❤️ 民心", "↓", "down"]
-                        ]
-                    )}
-
-                    <p>
-                        軍隊開始訓練，
-                        糧草與軍械也逐步準備。
-                    </p>
-
-                    <p>
-                        百姓仍需要負擔部分軍備支出，
-                        但尚未進入全面戰爭。
-                    </p>
-                `;
-
-            }
-
-
-
-            // 繼續休養
-
-            else {
-
-                food += 8;
-                power += 5;
-                people += 5;
-
-                emperorAuthority += 6;
-                zhugeInfluence -= 5;
-                trust -= 6;
-                legacy -= 8;
-
-                result.innerHTML = `
-
-                    <h3>你再次拒絕北伐</h3>
-
-                    ${impactTree(
-                        "堅持休養生息",
-                        [
-                            ["🏯 國力", "↑", "up"],
-                            ["🌾 糧草", "↑", "up"],
-                            ["❤️ 民心", "↑", "up"]
-                        ]
-                    )}
-
-                    <p>
-                        蜀漢國內變得更加穩定，
-                        百姓也逐漸恢復正常生活。
-                    </p>
-
-                    <p>
-                        然而朝廷中的問題變得更加尖銳：
-                    </p>
-
-                    <p>
-                        <strong>
-                            如果蜀漢不再追求「興復漢室」，
-                            那麼蜀漢存在的目標究竟是什麼？
-                        </strong>
-                    </p>
-                `;
-
-            }
-
-        }
-
-
-        result.innerHTML += `
-            <button onclick="nextRound6()">繼續 →</button>
+            ${impactTree("完全信任諸葛亮", [
+                ["🏯 國力","↑","up"],
+                ["🤝 君臣合作","↑","up"],
+                ["🧠 權力結構","？","mystery"]
+            ])}
         `;
 
-        finishChoice(result);
+    }
+
+    else if (choice === 2) {
+
+        power += 2;
+
+        zhugeInfluence += 3;
+        emperorAuthority += 2;
+        trust += 3;
+        legacy += 2;
+
+        result.innerHTML = `
+            <h3>你選擇了：信任，但保留監督</h3>
+
+            ${impactTree("信任但保留監督", [
+                ["🏯 國力","↑","up"],
+                ["🤝 君臣合作","↑","up"],
+                ["⚖️ 權力平衡","↑","up"]
+            ])}
+        `;
 
     }
 
+    else {
+
+        power -= 2;
+
+        zhugeInfluence -= 6;
+        emperorAuthority += 8;
+        trust -= 7;
+
+        result.innerHTML = `
+            <h3>你選擇了：限制丞相權力</h3>
+
+            ${impactTree("限制丞相權力", [
+                ["🏯 國力","↓","down"],
+                ["👑 皇權","↑","up"],
+                ["🤝 君臣信任","↓","down"]
+            ])}
+        `;
+    }
+
+    result.innerHTML += `<button onclick="nextRound1()">下一回合 →</button>`;
+
+    finishChoice(result);
+}
 
 
-    function nextRound6() {
+function nextRound1() {
+    showRound("round1","round2");
+}
 
-        alert("第六回合完成！下一回合將進入君臣關係的關鍵時刻。");
+
+
+// =====================================================
+// 第二回合
+// =====================================================
+
+function chooseRound2(choice, element) {
+
+    if (round2Chosen) return;
+
+    round2Chosen = true;
+    lockChoices("choices2", element);
+
+    const result = document.getElementById("result2");
+
+    if (choice === 1) {
+
+        power += 4;
+        people += 1;
+
+        zhugeInfluence += 7;
+        emperorAuthority -= 3;
+        trust += 4;
+        legacy += 3;
+
+        result.innerHTML = `
+            <h3>你完全採納諸葛亮的用人建議</h3>
+
+            ${impactTree("採納丞相建議", [
+                ["🏯 國力","↑","up"],
+                ["❤️ 民心","↑","up"],
+                ["🧠 丞相影響","？","mystery"]
+            ])}
+        `;
 
     }
 
+    else if (choice === 2) {
 
+        power += 3;
+        people += 1;
 
-    // =====================================================
-    // 共用功能
-    // =====================================================
+        zhugeInfluence += 2;
+        emperorAuthority += 4;
+        trust += 2;
+        legacy += 2;
 
-    function finishChoice(result) {
+        result.innerHTML = `
+            <h3>你保留最後的人事決定權</h3>
 
-        keepValuesInRange();
-
-        updateDisplay();
-
-        result.classList.remove("hidden");
+            ${impactTree("皇帝最後決定", [
+                ["🏯 國力","↑","up"],
+                ["❤️ 民心","↑","up"],
+                ["👑 皇權","↑","up"]
+            ])}
+        `;
 
     }
 
+    else {
+
+        power -= 2;
+        people -= 1;
+
+        zhugeInfluence -= 5;
+        emperorAuthority += 7;
+        trust -= 5;
+
+        result.innerHTML = `
+            <h3>你限制了丞相的人事權</h3>
+
+            ${impactTree("分散人事權", [
+                ["🏯 國力","↓","down"],
+                ["❤️ 民心","↓","down"],
+                ["👑 皇權","↑","up"]
+            ])}
+        `;
+    }
+
+    result.innerHTML += `<button onclick="nextRound2()">下一回合 →</button>`;
+
+    finishChoice(result);
+}
 
 
-    function impactTree(decision, items) {
+function nextRound2() {
+    showRound("round2","round3");
+}
 
-        let itemHTML = "";
 
 
-        items.forEach(function(item) {
+// =====================================================
+// 第三回合
+// =====================================================
 
-            itemHTML += `
+function chooseRound3(choice, element) {
 
-                <div class="impact-item">
+    if (round3Chosen) return;
 
-                    <div class="impact-name">
-                        ${item[0]}
-                    </div>
+    round3Chosen = true;
+    lockChoices("choices3", element);
 
-                    <div class="impact-arrow ${item[2]}">
-                        ${item[1]}
-                    </div>
+    const result = document.getElementById("result3");
 
+    if (choice === 1) {
+
+        power += 5;
+        people += 1;
+
+        zhugeInfluence += 7;
+        emperorAuthority -= 4;
+        trust += 3;
+        legacy += 3;
+
+        result.innerHTML = `
+            <h3>你決定全部重用</h3>
+
+            ${impactTree("全部重用", [
+                ["🏯 國力","↑","up"],
+                ["❤️ 民心","↑","up"],
+                ["🧠 權力結構","？","mystery"]
+            ])}
+        `;
+
+    }
+
+    else if (choice === 2) {
+
+        power += 3;
+        people += 1;
+
+        zhugeInfluence += 3;
+        emperorAuthority += 3;
+        trust += 3;
+        legacy += 2;
+
+        result.innerHTML = `
+            <h3>你重用人才，同時保留不同聲音</h3>
+
+            ${impactTree("人才與制衡並行", [
+                ["🏯 國力","↑","up"],
+                ["❤️ 民心","↑","up"],
+                ["⚖️ 權力平衡","↑","up"]
+            ])}
+        `;
+
+    }
+
+    else {
+
+        power -= 2;
+        people -= 1;
+
+        zhugeInfluence -= 5;
+        emperorAuthority += 7;
+        trust -= 4;
+
+        result.innerHTML = `
+            <h3>你提拔非丞相系統官員</h3>
+
+            ${impactTree("提拔其他官員", [
+                ["🏯 國力","↓","down"],
+                ["❤️ 民心","↓","down"],
+                ["👑 皇權","↑","up"]
+            ])}
+        `;
+    }
+
+    result.innerHTML += `<button onclick="nextRound3()">下一回合 →</button>`;
+
+    finishChoice(result);
+}
+
+
+function nextRound3() {
+    showRound("round3","round4");
+}
+
+
+
+// =====================================================
+// 第四回合
+// =====================================================
+
+function chooseRound4(choice, element) {
+
+    if (round4Chosen) return;
+
+    round4Chosen = true;
+    lockChoices("choices4", element);
+
+    const result = document.getElementById("result4");
+
+    if (choice === 1) {
+
+        army += 8;
+        power += 2;
+
+        zhugeInfluence += 7;
+        emperorAuthority -= 5;
+        trust += 4;
+        legacy += 3;
+
+        result.innerHTML = `
+            <h3>你完全授權向寵整頓軍隊</h3>
+
+            ${impactTree("完全授權向寵", [
+                ["⚔️ 軍力","↑","up"],
+                ["🏯 國力","↑","up"],
+                ["🧠 軍政結構","？","mystery"]
+            ])}
+        `;
+
+    }
+
+    else if (choice === 2) {
+
+        army += 5;
+        power += 2;
+
+        zhugeInfluence += 3;
+        emperorAuthority += 3;
+        trust += 2;
+        legacy += 2;
+
+        result.innerHTML = `
+            <h3>你任用向寵，但保留監督</h3>
+
+            ${impactTree("任用向寵，保留監督", [
+                ["⚔️ 軍力","↑","up"],
+                ["🏯 國力","↑","up"],
+                ["👑 皇權","↑","up"]
+            ])}
+        `;
+
+    }
+
+    else {
+
+        army -= 2;
+        power -= 1;
+
+        zhugeInfluence -= 5;
+        emperorAuthority += 7;
+        trust -= 5;
+
+        result.innerHTML = `
+            <h3>你選擇分散軍權</h3>
+
+            ${impactTree("分散軍權", [
+                ["⚔️ 軍力","↓","down"],
+                ["🏯 國力","↓","down"],
+                ["👑 皇權","↑","up"]
+            ])}
+        `;
+    }
+
+    result.innerHTML += `<button onclick="nextRound4()">下一回合 →</button>`;
+
+    finishChoice(result);
+}
+
+
+function nextRound4() {
+    showRound("round4","round5");
+}
+
+
+
+// =====================================================
+// 第五回合
+// =====================================================
+
+function chooseRound5(choice, element) {
+
+    if (round5Chosen) return;
+
+    round5Chosen = true;
+    lockChoices("choices5", element);
+
+    const result = document.getElementById("result5");
+
+    if (choice === 1) {
+
+        northernExpeditionChoice = "full";
+
+        legacy += 10;
+        zhugeInfluence += 6;
+        trust += 4;
+
+        food -= 12;
+
+        if (army >= 40 && food >= 30) {
+
+            army += 5;
+            power += 5;
+            people += 3;
+
+            result.innerHTML = `
+                <h3>你選擇全力北伐</h3>
+
+                <div class="success-box">
+                    北伐初期取得數場局部勝利。
                 </div>
+
+                ${impactTree("全力北伐", [
+                    ["⚔️ 軍勢","↑","up"],
+                    ["❤️ 民心","↑","up"],
+                    ["🌾 糧草","↓","down"]
+                ])}
             `;
 
-        });
+        }
 
+        else {
 
-        return `
+            army -= 5;
+            power -= 5;
+            people -= 5;
 
-            <div class="impact-tree">
+            result.innerHTML = `
+                <h3>你選擇全力北伐</h3>
 
-                <div class="impact-title">
-                    決策影響
+                <div class="danger-box">
+                    軍隊與後勤準備不足，前線陷入困境。
                 </div>
 
-                <div class="impact-decision">
-                    ${decision}
-                </div>
+                ${impactTree("北伐失利", [
+                    ["⚔️ 軍勢","↓","down"],
+                    ["❤️ 民心","↓","down"],
+                    ["🌾 糧草","↓","down"]
+                ])}
+            `;
+        }
 
-                <div class="tree-line">│</div>
+    }
 
-                <div class="tree-line">
-                    ┌────────┼────────┐
-                </div>
+    else if (choice === 2) {
 
-                <div class="impact-items">
-                    ${itemHTML}
-                </div>
+        northernExpeditionChoice = "limited";
 
+        legacy += 5;
+        food -= 6;
+        trust += 1;
+
+        if (army >= 40) {
+
+            army += 2;
+            power += 2;
+            people += 1;
+
+            result.innerHTML = `
+                <h3>你選擇有限北伐</h3>
+
+                ${impactTree("有限北伐", [
+                    ["⚔️ 軍勢","↑","up"],
+                    ["❤️ 民心","↑","up"],
+                    ["🌾 糧草","↓","down"]
+                ])}
+            `;
+
+        }
+
+        else {
+
+            army -= 1;
+            power -= 1;
+
+            result.innerHTML = `
+                <h3>你選擇有限北伐</h3>
+
+                ${impactTree("有限北伐", [
+                    ["⚔️ 軍勢","↓","down"],
+                    ["❤️ 民心","→","neutral"],
+                    ["🌾 糧草","↓","down"]
+                ])}
+            `;
+        }
+
+    }
+
+    else {
+
+        northernExpeditionChoice = "delay";
+
+        food += 8;
+        power += 4;
+        people += 5;
+
+        emperorAuthority += 4;
+        zhugeInfluence -= 3;
+        trust -= 3;
+        legacy -= 8;
+
+        result.innerHTML = `
+            <h3>你選擇暫緩北伐</h3>
+
+            ${impactTree("休養生息", [
+                ["🏯 國力","↑","up"],
+                ["🌾 糧草","↑","up"],
+                ["❤️ 民心","↑","up"]
+            ])}
+        `;
+    }
+
+    result.innerHTML += `<button onclick="nextRound5()">查看後續 →</button>`;
+
+    finishChoice(result);
+}
+
+
+function nextRound5() {
+
+    buildRound6();
+    showRound("round5","round6");
+}
+
+
+
+// =====================================================
+// 第六回合
+// =====================================================
+
+function buildRound6() {
+
+    const story = document.getElementById("round6Story");
+    const choices = document.getElementById("choices6");
+
+    if (northernExpeditionChoice === "full") {
+
+        story.innerHTML = `
+            <h2>前線急報：糧草將盡</h2>
+
+            <div class="report">
+                前線大軍每日消耗大量糧草，
+                運糧道路漫長，民夫疲憊。
+            </div>
+
+            <p>
+                諸葛亮仍主張把握戰機，
+                但朝中官員擔心百姓已難承受新的徵糧。
+            </p>
+
+            <p><strong>你願意付出多少代價？</strong></p>
+        `;
+
+        choices.innerHTML = `
+            <div class="choice" onclick="chooseRound6(1,this)">
+                <strong>A｜追加糧草，繼續進攻</strong><br><br>
+                既然已經出兵，就不能在關鍵時刻退縮。
+            </div>
+
+            <div class="choice" onclick="chooseRound6(2,this)">
+                <strong>B｜停止擴張戰線，轉為守勢</strong><br><br>
+                保留戰果，同時降低消耗。
+            </div>
+
+            <div class="choice" onclick="chooseRound6(3,this)">
+                <strong>C｜立即下詔班師</strong><br><br>
+                國家不能為一場戰爭耗盡根本。
             </div>
         `;
 
     }
 
+    else if (northernExpeditionChoice === "limited") {
+
+        story.innerHTML = `
+            <h2>前線來報：魏軍出現破綻</h2>
+
+            <div class="report">
+                蜀軍取得部分戰果，
+                有將領認為可以擴大攻勢。
+            </div>
+
+            <p><strong>你是否改變原本的有限戰略？</strong></p>
+        `;
+
+        choices.innerHTML = `
+            <div class="choice" onclick="chooseRound6(1,this)">
+                <strong>A｜趁勢增兵，擴大北伐</strong><br><br>
+                戰機稍縱即逝，應乘勝追擊。
+            </div>
+
+            <div class="choice" onclick="chooseRound6(2,this)">
+                <strong>B｜維持有限戰略</strong><br><br>
+                不能因一時勝利改變整體國策。
+            </div>
+
+            <div class="choice" onclick="chooseRound6(3,this)">
+                <strong>C｜見好就收，撤軍回國</strong><br><br>
+                已取得成果，現在應保存實力。
+            </div>
+        `;
+
+    }
+
+    else {
+
+        story.innerHTML = `
+            <h2>朝廷爭議：何時才能北伐？</h2>
+
+            <div class="report">
+                糧倉逐漸充實，百姓負擔減輕。
+                但魏國也沒有停止恢復力量。
+            </div>
+
+            <div class="quote">
+                「北定中原，攘除姦凶，興復漢室，還於舊都。」
+            </div>
+
+            <p><strong>等待，本身是否也是一種風險？</strong></p>
+        `;
+
+        choices.innerHTML = `
+            <div class="choice" onclick="chooseRound6(1,this)">
+                <strong>A｜改變決定，批准出兵</strong><br><br>
+                國內已有恢復，不能永遠等待。
+            </div>
+
+            <div class="choice" onclick="chooseRound6(2,this)">
+                <strong>B｜整軍備糧，但暫不出兵</strong><br><br>
+                做好準備，再等待適當時機。
+            </div>
+
+            <div class="choice" onclick="chooseRound6(3,this)">
+                <strong>C｜堅持休養生息</strong><br><br>
+                蜀漢首要任務是生存。
+            </div>
+        `;
+    }
+}
 
 
-    // =====================================================
-    // 國力狀態
-    // =====================================================
 
-    function getPowerStatus(value) {
+function chooseRound6(choice, element) {
 
-        if (value >= 70) return "強盛";
+    if (round6Chosen) return;
 
-        if (value >= 40) return "穩定";
+    round6Chosen = true;
+    lockChoices("choices6", element);
 
-        return "衰弱";
+    const result = document.getElementById("result6");
 
+
+    if (northernExpeditionChoice === "full") {
+
+        if (choice === 1) {
+
+            food -= 15;
+            people -= 10;
+
+            army += 3;
+
+            zhugeInfluence += 7;
+            emperorAuthority -= 4;
+            trust += 5;
+            legacy += 7;
+
+            if (food >= 20 && army >= 40) {
+
+                power += 4;
+
+                result.innerHTML = `
+                    <h3>你追加糧草，繼續北伐</h3>
+
+                    ${impactTree("追加糧草", [
+                        ["⚔️ 軍勢","↑","up"],
+                        ["🌾 糧草","↓","down"],
+                        ["❤️ 民心","↓","down"]
+                    ])}
+
+                    <p>
+                        各郡再次徵糧，
+                        百姓與民夫的負擔明顯加重。
+                    </p>
+                `;
+
+            }
+
+            else {
+
+                power -= 5;
+                army -= 4;
+
+                result.innerHTML = `
+                    <h3>你勉強維持北伐</h3>
+
+                    ${impactTree("勉強維持戰爭", [
+                        ["⚔️ 軍勢","↓","down"],
+                        ["🌾 糧草","↓","down"],
+                        ["❤️ 民心","↓","down"]
+                    ])}
+                `;
+            }
+
+        }
+
+        else if (choice === 2) {
+
+            food -= 3;
+            people -= 2;
+            army += 1;
+            power += 1;
+
+            emperorAuthority += 3;
+            trust += 1;
+            legacy += 2;
+
+            result.innerHTML = `
+                <h3>你命令前線轉攻為守</h3>
+
+                ${impactTree("轉攻為守", [
+                    ["⚔️ 軍勢","↑","up"],
+                    ["🌾 糧草","↓","down"],
+                    ["❤️ 民心","↓","down"]
+                ])}
+            `;
+
+        }
+
+        else {
+
+            food += 4;
+            people += 4;
+            army -= 2;
+
+            emperorAuthority += 7;
+            zhugeInfluence -= 6;
+            trust -= 7;
+            legacy -= 5;
+
+            result.innerHTML = `
+                <h3>你下令班師</h3>
+
+                ${impactTree("停止北伐", [
+                    ["🌾 糧草","↑","up"],
+                    ["❤️ 民心","↑","up"],
+                    ["🤝 君臣關係","↓","down"]
+                ])}
+            `;
+        }
+
+    }
+
+    else if (northernExpeditionChoice === "limited") {
+
+        if (choice === 1) {
+
+            food -= 9;
+
+            zhugeInfluence += 5;
+            trust += 4;
+            legacy += 6;
+
+            if (army >= 40 && food >= 25) {
+
+                army += 3;
+                power += 4;
+
+                result.innerHTML = `
+                    <h3>你決定乘勝追擊</h3>
+
+                    ${impactTree("擴大北伐", [
+                        ["⚔️ 軍勢","↑","up"],
+                        ["🏯 國力","↑","up"],
+                        ["🌾 糧草","↓","down"]
+                    ])}
+                `;
+
+            }
+
+            else {
+
+                army -= 3;
+                power -= 3;
+                people -= 5;
+
+                result.innerHTML = `
+                    <h3>擴大攻勢失利</h3>
+
+                    ${impactTree("擴大北伐失利", [
+                        ["⚔️ 軍勢","↓","down"],
+                        ["🏯 國力","↓","down"],
+                        ["❤️ 民心","↓","down"]
+                    ])}
+                `;
+            }
+
+        }
+
+        else if (choice === 2) {
+
+            food -= 3;
+            people -= 1;
+
+            army += 2;
+            power += 2;
+
+            emperorAuthority += 2;
+            trust += 2;
+            legacy += 3;
+
+            result.innerHTML = `
+                <h3>你維持有限戰略</h3>
+
+                ${impactTree("有限北伐", [
+                    ["⚔️ 軍力","↑","up"],
+                    ["🏯 國力","↑","up"],
+                    ["❤️ 民心","↓","down"]
+                ])}
+            `;
+
+        }
+
+        else {
+
+            food += 4;
+            people += 3;
+
+            emperorAuthority += 5;
+            zhugeInfluence -= 3;
+            trust -= 2;
+            legacy -= 2;
+
+            result.innerHTML = `
+                <h3>你決定見好就收</h3>
+
+                ${impactTree("保存實力", [
+                    ["🌾 糧草","↑","up"],
+                    ["❤️ 民心","↑","up"],
+                    ["📜 北伐目標","？","mystery"]
+                ])}
+            `;
+        }
+
+    }
+
+    else {
+
+        if (choice === 1) {
+
+            food -= 8;
+            people -= 3;
+            army += 3;
+
+            zhugeInfluence += 5;
+            trust += 5;
+            legacy += 7;
+
+            result.innerHTML = `
+                <h3>你改變決定，批准北伐</h3>
+
+                ${impactTree("休養後出兵", [
+                    ["⚔️ 軍勢","↑","up"],
+                    ["🌾 糧草","↓","down"],
+                    ["❤️ 民心","↓","down"]
+                ])}
+            `;
+
+        }
+
+        else if (choice === 2) {
+
+            food += 2;
+            people -= 1;
+            army += 5;
+            power += 2;
+
+            emperorAuthority += 4;
+            trust += 1;
+            legacy += 2;
+
+            result.innerHTML = `
+                <h3>你整軍備戰，但暫不出兵</h3>
+
+                ${impactTree("備戰而不戰", [
+                    ["⚔️ 軍力","↑","up"],
+                    ["🏯 國力","↑","up"],
+                    ["❤️ 民心","↓","down"]
+                ])}
+            `;
+
+        }
+
+        else {
+
+            food += 8;
+            power += 5;
+            people += 5;
+
+            emperorAuthority += 6;
+            zhugeInfluence -= 5;
+            trust -= 6;
+            legacy -= 8;
+
+            result.innerHTML = `
+                <h3>你再次拒絕北伐</h3>
+
+                ${impactTree("堅持休養生息", [
+                    ["🏯 國力","↑","up"],
+                    ["🌾 糧草","↑","up"],
+                    ["❤️ 民心","↑","up"]
+                ])}
+            `;
+        }
+    }
+
+    result.innerHTML += `<button onclick="nextRound6()">繼續 →</button>`;
+
+    finishChoice(result);
+}
+
+
+function nextRound6() {
+
+    buildRound7();
+    showRound("round6","round7");
+}
+
+
+
+// =====================================================
+// 第七回合
+// =====================================================
+
+function buildRound7() {
+
+    const story = document.getElementById("round7Story");
+
+    if (
+        zhugeInfluence >= 70 &&
+        emperorAuthority <= 45
+    ) {
+
+        story.innerHTML = `
+            <h2>「陛下亦宜自謀」</h2>
+
+            <div class="report">
+                朝廷政務井然有序。
+
+                <br><br>
+
+                但群臣遇到重大問題，
+                已經習慣先問：
+
+                <br><br>
+
+                <strong>「丞相意下如何？」</strong>
+            </div>
+
+            <p>
+                諸葛亮忠心耿耿，
+                只是所有重大決策似乎越來越依賴他。
+            </p>
+
+            <div class="quote">
+                「陛下亦宜自謀，以諮諏善道，察納雅言，
+                深追先帝遺詔。」
+            </div>
+        `;
+
+    }
+
+    else if (
+        emperorAuthority >= 70 &&
+        trust <= 45
+    ) {
+
+        story.innerHTML = `
+            <h2>「陛下亦宜自謀」</h2>
+
+            <div class="report">
+                越來越多奏章直接送到皇帝面前。
+
+                <br><br>
+
+                皇權得到強化，
+                但丞相府與各部之間的協調逐漸變差。
+            </div>
+
+            <div class="quote">
+                「陛下亦宜自謀，以諮諏善道，察納雅言。」
+            </div>
+        `;
+
+    }
+
+    else {
+
+        story.innerHTML = `
+            <h2>「陛下亦宜自謀」</h2>
+
+            <div class="report">
+                丞相仍主持大部分政務，
+                重大決策也會送到你的面前。
+            </div>
+
+            <p>
+                群臣開始觀察：
+                皇帝究竟只是批准奏章，
+                還是真的能做出自己的判斷？
+            </p>
+
+            <div class="quote">
+                「陛下亦宜自謀，以諮諏善道，察納雅言，
+                深追先帝遺詔。」
+            </div>
+        `;
+    }
+}
+
+
+
+function chooseRound7(choice, element) {
+
+    if (round7Chosen) return;
+
+    round7Chosen = true;
+    lockChoices("choices7", element);
+
+    const result = document.getElementById("result7");
+
+    if (choice === 1) {
+
+        emperorStyle = "delegation";
+
+        power += 4;
+
+        zhugeInfluence += 7;
+        emperorAuthority -= 4;
+        trust += 3;
+
+        if (zhugeInfluence >= 75) {
+
+            power += 2;
+            emperorAuthority -= 3;
+        }
+
+        result.innerHTML = `
+            <h3>你繼續由丞相主持朝政</h3>
+
+            ${impactTree("丞相主持議政", [
+                ["🏯 國力","↑","up"],
+                ["🤝 行政合作","↑","up"],
+                ["👑 皇帝角色","↓","down"]
+            ])}
+
+            <p>
+                朝廷效率很高。
+                但即使你沒有出席，
+                朝廷似乎仍然可以正常運作。
+            </p>
+        `;
+
+    }
+
+    else if (choice === 2) {
+
+        emperorStyle = "consultation";
+
+        power += 2;
+        people += 2;
+
+        emperorAuthority += 4;
+        trust += 3;
+        legacy += 3;
+
+        if (
+            Math.abs(zhugeInfluence - emperorAuthority) <= 20
+        ) {
+
+            power += 2;
+            trust += 2;
+        }
+
+        result.innerHTML = `
+            <h3>你召集群臣公開廷議</h3>
+
+            ${impactTree("察納雅言", [
+                ["👑 皇權","↑","up"],
+                ["🤝 君臣合作","↑","up"],
+                ["🏯 國力","↑","up"]
+            ])}
+
+            <p>
+                各方意見被帶到朝堂，
+                最後由你親自做出裁決。
+            </p>
+        `;
+
+    }
+
+    else {
+
+        emperorStyle = "centralization";
+
+        emperorAuthority += 9;
+        zhugeInfluence -= 6;
+        trust -= 6;
+        power -= 2;
+
+        if (trust < 40) {
+
+            power -= 3;
+            people -= 2;
+        }
+
+        result.innerHTML = `
+            <h3>你要求各部直接向皇帝奏報</h3>
+
+            ${impactTree("強化皇帝直接統治", [
+                ["👑 皇權","↑","up"],
+                ["🧠 丞相權力","↓","down"],
+                ["🤝 君臣信任","↓","down"]
+            ])}
+        `;
+    }
+
+    result.innerHTML += `<button onclick="nextRound7()">最後一回合 →</button>`;
+
+    finishChoice(result);
+}
+
+
+function nextRound7() {
+
+    buildRound8();
+    showRound("round7","round8");
+}
+
+
+
+// =====================================================
+// 第八回合
+// =====================================================
+
+function buildRound8() {
+
+    const story = document.getElementById("round8Story");
+
+    let politicalMessage = "";
+
+    if (trust < 35) {
+
+        politicalMessage = `
+            <div class="danger-box">
+                皇帝與丞相之間已缺乏信任，
+                朝廷甚至開始出現不同命令。
+            </div>
+        `;
+
+    }
+
+    else if (
+        zhugeInfluence >= 75 &&
+        emperorAuthority <= 45
+    ) {
+
+        politicalMessage = `
+            <div class="warning-box">
+                百官第一個等待的不是皇帝的命令，
+                而是丞相府的軍令。
+            </div>
+        `;
+
+    }
+
+    else {
+
+        politicalMessage = `
+            <div class="success-box">
+                朝廷仍能召集百官，
+                商議如何面對危機。
+            </div>
+        `;
+    }
+
+    story.innerHTML = `
+        <h2>魏軍大舉進犯</h2>
+
+        <div class="report">
+            魏國大軍向漢中逼近，
+            邊關急報接連送入成都。
+        </div>
+
+        ${politicalMessage}
+
+        <div class="quote">
+            「今天下三分，益州疲弊，
+            此誠危急存亡之秋也。」
+        </div>
+
+        <p>
+            <strong>
+                最後一次，你要如何決定蜀漢的指揮方式？
+            </strong>
+        </p>
+    `;
+}
+
+
+
+function chooseRound8(choice, element) {
+
+    if (round8Chosen) return;
+
+    round8Chosen = true;
+    lockChoices("choices8", element);
+
+    const result = document.getElementById("result8");
+
+    if (choice === 1) {
+
+        finalCommand = "zhuge";
+
+        zhugeInfluence += 8;
+        emperorAuthority -= 5;
+        trust += 4;
+        army += 4;
+
+        if (trust >= 45) {
+            power += 3;
+        }
+
+        result.innerHTML = `
+            <h3>你命諸葛亮全權統籌軍政</h3>
+
+            ${impactTree("統一指揮", [
+                ["⚔️ 軍力","↑","up"],
+                ["🤝 行政效率","↑","up"],
+                ["👑 皇帝角色","↓","down"]
+            ])}
+        `;
+
+    }
+
+    else if (choice === 2) {
+
+        finalCommand = "joint";
+
+        emperorAuthority += 3;
+        trust += 5;
+        power += 2;
+
+        if (
+            trust >= 45 &&
+            Math.abs(zhugeInfluence - emperorAuthority) <= 30
+        ) {
+
+            army += 4;
+            people += 3;
+
+        }
+
+        else {
+
+            army += 1;
+        }
+
+        result.innerHTML = `
+            <h3>你選擇君臣共同決策</h3>
+
+            ${impactTree("君臣共治", [
+                ["⚔️ 軍力","↑","up"],
+                ["🤝 君臣合作","↑","up"],
+                ["👑 皇權","↑","up"]
+            ])}
+        `;
+
+    }
+
+    else {
+
+        finalCommand = "emperor";
+
+        emperorAuthority += 8;
+        zhugeInfluence -= 5;
+        trust -= 5;
+
+        if (
+            emperorAuthority >= 65 &&
+            trust >= 40
+        ) {
+
+            army += 2;
+            power += 2;
+
+        }
+
+        else {
+
+            army -= 3;
+            power -= 3;
+        }
+
+        result.innerHTML = `
+            <h3>你親自掌握最高指揮權</h3>
+
+            ${impactTree("皇帝直接統籌", [
+                ["👑 皇權","↑","up"],
+                ["⚔️ 軍事指揮","？","mystery"],
+                ["🤝 君臣關係","↓","down"]
+            ])}
+        `;
+    }
+
+    result.innerHTML += `
+        <button onclick="finishGame()">查看蜀漢的命運 →</button>
+    `;
+
+    finishChoice(result);
+}
+
+
+
+// =====================================================
+// 遊戲結束
+// =====================================================
+
+function finishGame() {
+
+    keepValuesInRange();
+
+    document.getElementById("round8").classList.add("hidden");
+
+    const endingScreen =
+        document.getElementById("ending-screen");
+
+    endingScreen.classList.remove("hidden");
+
+    const ending = calculateEnding();
+    const playerType = calculatePlayerType();
+
+    endingScreen.innerHTML = `
+
+        <div class="ending-card">
+
+            <div class="ending-title">
+                ${ending.title}
+            </div>
+
+            <div class="ending-text">
+                ${ending.text}
+            </div>
+
+            <div class="final-grid">
+
+                <div class="final-item">
+                    <strong>🏯 國力</strong>
+                    ${getPowerStatus(power)}
+                </div>
+
+                <div class="final-item">
+                    <strong>⚔️ 軍力</strong>
+                    ${getArmyStatus(army)}
+                </div>
+
+                <div class="final-item">
+                    <strong>🌾 糧草</strong>
+                    ${getFoodStatus(food)}
+                </div>
+
+                <div class="final-item">
+                    <strong>❤️ 民心</strong>
+                    ${getPeopleStatus(people)}
+                </div>
+
+                <div class="final-item">
+                    <strong>👑 皇帝權威</strong>
+                    ${getAuthorityStatus(emperorAuthority)}
+                </div>
+
+                <div class="final-item">
+                    <strong>🧠 丞相影響</strong>
+                    ${getInfluenceStatus(zhugeInfluence)}
+                </div>
+
+                <div class="final-item">
+                    <strong>🤝 君臣關係</strong>
+                    ${getTrustStatus(trust)}
+                </div>
+
+                <div class="final-item">
+                    <strong>📜 先帝遺志</strong>
+                    ${getLegacyStatus(legacy)}
+                </div>
+
+            </div>
+
+            <div class="player-type">
+
+                <div class="player-type-title">
+                    你的劉禪
+                </div>
+
+                <div class="player-type-name">
+                    ${playerType.name}
+                </div>
+
+                <div>
+                    ${playerType.description}
+                </div>
+
+            </div>
+
+            <div class="quote">
+                「願陛下親之信之，則漢室之隆，可計日而待也。」
+            </div>
+
+            <p>
+                <strong>思考：</strong>
+                諸葛亮究竟希望劉禪成為一位
+                「聽話的皇帝」，
+                還是一位「能自己判斷的皇帝」？
+            </p>
+
+            <button onclick="location.reload()">
+                重新遊玩
+            </button>
+
+        </div>
+    `;
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+
+// =====================================================
+// V0.6.1 重新平衡的八種結局
+// =====================================================
+
+function calculateEnding() {
+
+
+    // -------------------------------------------------
+    // 1. 蜀漢危機
+    // 只有真正嚴重衰敗才進入
+    // -------------------------------------------------
+
+    if (
+        power < 25 ||
+        army < 20 ||
+        food < 10 ||
+        people < 20
+    ) {
+
+        return {
+
+            title: "《蜀漢危機》",
+
+            text: `
+                <p>
+                    魏軍壓境之際，
+                    蜀漢已經沒有足夠的力量承受新的危機。
+                </p>
+
+                <p>
+                    長年的政治選擇與軍事消耗，
+                    終於使國家來到極限。
+                </p>
+
+                <p>
+                    <strong>
+                        你此刻才真正理解，
+                        何謂「危急存亡之秋」。
+                    </strong>
+                </p>
+            `
+        };
     }
 
 
 
-    // =====================================================
-    // 軍力狀態
-    // =====================================================
+    // -------------------------------------------------
+    // 2. 君臣失和
+    // 信任極低才觸發
+    // -------------------------------------------------
 
-    function getArmyStatus(value) {
+    if (trust < 28) {
 
-        if (value >= 70) return "精強";
+        return {
 
-        if (value >= 40) return "尚可";
+            title: "《君臣失和》",
 
-        return "薄弱";
+            text: `
+                <p>
+                    蜀漢仍有軍隊，
+                    朝廷也尚未崩潰。
+                </p>
 
+                <p>
+                    但皇帝與丞相之間，
+                    已經失去了最重要的東西：
+                    <strong>信任。</strong>
+                </p>
+
+                <p>
+                    每一道命令都伴隨猜疑，
+                    每一次決策都先考慮權力。
+                </p>
+
+                <p>
+                    <strong>
+                        蜀漢真正的裂縫，
+                        已經出現在朝廷內部。
+                    </strong>
+                </p>
+            `
+        };
     }
 
 
 
-    // =====================================================
-    // 糧草狀態
-    // =====================================================
+    // -------------------------------------------------
+    // 3. 丞相治蜀
+    // 高度依賴諸葛亮
+    // -------------------------------------------------
 
-    function getFoodStatus(value) {
+    if (
+        zhugeInfluence >= 72 &&
+        emperorAuthority <= 48 &&
+        power >= 38 &&
+        army >= 38
+    ) {
 
-        if (value >= 70) return "充足";
+        return {
 
-        if (value >= 40) return "尚足";
+            title: "《丞相治蜀》",
 
-        return "短缺";
+            text: `
+                <p>
+                    蜀漢政令通達，
+                    軍隊也維持相當戰力。
+                </p>
 
+                <p>
+                    百官信任諸葛亮，
+                    軍隊服從諸葛亮，
+                    重要決策也多由丞相府完成。
+                </p>
+
+                <p>
+                    你仍然坐在皇位上。
+                </p>
+
+                <p>
+                    <strong>
+                        蜀漢很強大。<br>
+                        只是，究竟是誰在治理蜀漢？
+                    </strong>
+                </p>
+            `
+        };
     }
 
 
 
-    // =====================================================
-    // 民心狀態
-    //
-    // 70以上：歸附
-    // 55～69：安定
-    // 40～54：動搖
-    // 39以下：不安
-    // =====================================================
+    // -------------------------------------------------
+    // 4. 乾綱獨斷
+    // 皇權極高、丞相受到壓縮
+    // -------------------------------------------------
 
-    function getPeopleStatus(value) {
+    if (
+        emperorAuthority >= 72 &&
+        zhugeInfluence <= 48
+    ) {
 
-        if (value >= 70) return "歸附";
+        return {
 
-        if (value >= 55) return "安定";
+            title: "《乾綱獨斷》",
 
-        if (value >= 40) return "動搖";
+            text: `
+                <p>
+                    如今朝廷上下都知道：
+                    最後的決定來自皇帝。
+                </p>
 
-        return "不安";
+                <p>
+                    丞相不再是蜀漢唯一的政治中心，
+                    百官也逐漸習慣直接等待你的裁決。
+                </p>
 
+                <p>
+                    <strong>
+                        你終於真正掌握了皇權。
+                    </strong>
+                </p>
+
+                <p>
+                    但從今以後，
+                    每一次成功與失敗，
+                    也都只能由你自己承擔。
+                </p>
+            `
+        };
     }
 
 
 
-    // =====================================================
-    // 更新畫面
-    // =====================================================
+    // -------------------------------------------------
+    // 5. 休養生息
+    // 休養路線優先辨識
+    // -------------------------------------------------
 
-    function updateDisplay() {
+    if (
+        northernExpeditionChoice === "delay" &&
+        food >= 58 &&
+        people >= 62 &&
+        legacy <= 50
+    ) {
 
-        document.getElementById("power").innerText =
-            getPowerStatus(power);
+        return {
 
-        document.getElementById("army").innerText =
-            getArmyStatus(army);
+            title: "《休養生息》",
 
-        document.getElementById("food").innerText =
-            getFoodStatus(food);
+            text: `
+                <p>
+                    成都的糧倉逐漸充實，
+                    百姓重新回到田野。
+                </p>
 
-        document.getElementById("people").innerText =
-            getPeopleStatus(people);
+                <p>
+                    戰爭不再主宰所有人的生活，
+                    蜀漢也得到喘息的時間。
+                </p>
 
+                <p>
+                    然而，「興復漢室」這四個字，
+                    已經不像過去那樣響亮。
+                </p>
+
+                <p>
+                    <strong>
+                        你保存了蜀漢。<br>
+                        但你是否也正在放下漢室？
+                    </strong>
+                </p>
+            `
+        };
     }
 
 
 
-    // =====================================================
-    // 限制 0～100
-    // =====================================================
+    // -------------------------------------------------
+    // 6. 興復漢室
+    // 北伐型玩家較容易達成
+    // -------------------------------------------------
 
-    function clamp(value) {
+    if (
+        northernExpeditionChoice !== "delay" &&
+        legacy >= 65 &&
+        army >= 45 &&
+        food >= 18 &&
+        trust >= 40 &&
+        power >= 40
+    ) {
 
-        return Math.max(0, Math.min(100, value));
+        return {
 
+            title: "《興復漢室》",
+
+            text: `
+                <p>
+                    蜀軍守住了最危急的局面，
+                    並保有再次向北進軍的可能。
+                </p>
+
+                <p>
+                    多年的整軍、用人與北伐，
+                    終於沒有白費。
+                </p>
+
+                <p>
+                    「北定中原」仍是一條漫長的道路，
+                    但它已不只是奏章中的理想。
+                </p>
+
+                <p>
+                    <strong>
+                        先帝留下的旗幟，
+                        仍然向北飄揚。
+                    </strong>
+                </p>
+            `
+        };
     }
 
 
 
-    function keepValuesInRange() {
+    // -------------------------------------------------
+    // 7. 蜀漢中興
+    // 治理成果優秀，不一定要北伐
+    // -------------------------------------------------
 
-        power = clamp(power);
+    if (
+        power >= 50 &&
+        people >= 55 &&
+        trust >= 40
+    ) {
 
-        army = clamp(army);
+        return {
 
-        food = clamp(food);
+            title: "《蜀漢中興》",
 
-        people = clamp(people);
+            text: `
+                <p>
+                    你沒有立刻完成統一天下的霸業，
+                    卻讓原本疲弊的蜀漢重新站穩。
+                </p>
 
-        zhugeInfluence = clamp(zhugeInfluence);
+                <p>
+                    朝廷能夠運作，
+                    百姓仍願意支持國家，
+                    君臣也尚能合作。
+                </p>
 
-        emperorAuthority = clamp(emperorAuthority);
-
-        trust = clamp(trust);
-
-        legacy = clamp(legacy);
-
+                <p>
+                    <strong>
+                        或許「漢室之隆」，
+                        不只存在於戰場之上。
+                    </strong>
+                </p>
+            `
+        };
     }
 
+
+
+    // -------------------------------------------------
+    // 8. 守成之主
+    // 中間型、折衷型玩家
+    // -------------------------------------------------
+
+    return {
+
+        title: "《守成之主》",
+
+        text: `
+            <p>
+                蜀漢沒有迎來決定性的勝利，
+                卻也沒有走向覆亡。
+            </p>
+
+            <p>
+                皇帝、丞相、軍隊與百姓，
+                在一次次妥協與選擇之中，
+                維持著這個國家。
+            </p>
+
+            <p>
+                天下依然三分。
+            </p>
+
+            <p>
+                <strong>
+                    你沒有改寫天下，
+                    但至少替蜀漢保留了下一次選擇的機會。
+                </strong>
+            </p>
+        `
+    };
+}
+
+
+
+// =====================================================
+// 玩家類型
+// =====================================================
+
+function calculatePlayerType() {
+
+    if (
+        zhugeInfluence >= 70 &&
+        emperorAuthority <= 48
+    ) {
+
+        return {
+            name: "丞相派",
+            description:
+                "你相信諸葛亮的能力與忠誠，願意把大量權力交給他。國政可能非常有效率，但皇帝也容易退居幕後。"
+        };
+    }
+
+
+    if (
+        emperorAuthority >= 70 &&
+        zhugeInfluence <= 50
+    ) {
+
+        return {
+            name: "雄主型",
+            description:
+                "你重視皇帝本身的決斷與權威，不願只做批准奏章的君主，但也必須承擔權力集中的風險。"
+        };
+    }
+
+
+    if (legacy >= 68) {
+
+        return {
+            name: "北伐型",
+            description:
+                "你把先帝遺志與興復漢室放在重要位置，願意承擔軍事與民生上的代價換取改變天下的機會。"
+        };
+    }
+
+
+    if (
+        people >= 62 &&
+        food >= 55
+    ) {
+
+        return {
+            name: "守成型",
+            description:
+                "你更重視百姓、國力與長期生存。對你而言，保存蜀漢可能比一次決定性的勝負更重要。"
+        };
+    }
+
+
+    return {
+        name: "制衡型",
+        description:
+            "你試圖在皇權、丞相、軍事與民生之間保持平衡。這條路不容易出現極端成果，也比較不會把國家押在單一人物身上。"
+    };
+}
+
+
+
+// =====================================================
+// 狀態文字
+// =====================================================
+
+function getPowerStatus(value) {
+
+    if (value >= 70) return "強盛";
+    if (value >= 40) return "穩定";
+
+    return "衰弱";
+}
+
+
+function getArmyStatus(value) {
+
+    if (value >= 70) return "精強";
+    if (value >= 40) return "尚可";
+
+    return "薄弱";
+}
+
+
+function getFoodStatus(value) {
+
+    if (value >= 70) return "充足";
+    if (value >= 40) return "尚足";
+
+    return "短缺";
+}
+
+
+function getPeopleStatus(value) {
+
+    if (value >= 70) return "歸附";
+    if (value >= 55) return "安定";
+    if (value >= 40) return "動搖";
+
+    return "不安";
+}
+
+
+function getAuthorityStatus(value) {
+
+    if (value >= 70) return "強勢";
+    if (value >= 45) return "穩固";
+
+    return "薄弱";
+}
+
+
+function getInfluenceStatus(value) {
+
+    if (value >= 70) return "極高";
+    if (value >= 45) return "穩定";
+
+    return "受限";
+}
+
+
+function getTrustStatus(value) {
+
+    if (value >= 70) return "深厚";
+    if (value >= 45) return "尚可";
+
+    return "疏離";
+}
+
+
+function getLegacyStatus(value) {
+
+    if (value >= 70) return "堅持";
+    if (value >= 45) return "折衷";
+
+    return "淡化";
+}
+
+
+function updateDisplay() {
+
+    document.getElementById("power").innerText =
+        getPowerStatus(power);
+
+    document.getElementById("army").innerText =
+        getArmyStatus(army);
+
+    document.getElementById("food").innerText =
+        getFoodStatus(food);
+
+    document.getElementById("people").innerText =
+        getPeopleStatus(people);
+}
+
+
+
+// =====================================================
+// 影響樹
+// =====================================================
+
+function impactTree(decision, items) {
+
+    let itemHTML = "";
+
+    items.forEach(function(item) {
+
+        itemHTML += `
+            <div class="impact-item">
+
+                <div class="impact-name">
+                    ${item[0]}
+                </div>
+
+                <div class="impact-arrow ${item[2]}">
+                    ${item[1]}
+                </div>
+
+            </div>
+        `;
+    });
+
+
+    return `
+        <div class="impact-tree">
+
+            <div class="impact-title">
+                決策影響
+            </div>
+
+            <div class="impact-decision">
+                ${decision}
+            </div>
+
+            <div class="tree-line">│</div>
+
+            <div class="tree-line">
+                ┌────────┼────────┐
+            </div>
+
+            <div class="impact-items">
+                ${itemHTML}
+            </div>
+
+        </div>
+    `;
+}
 
 </script>
 
 </body>
-
 </html>
